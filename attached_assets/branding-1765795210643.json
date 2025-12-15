@@ -1,0 +1,98 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Aeonik",
+      "role": "body"
+    }
+  ],
+  "colors": {
+    "primary": "#2B2E3A",
+    "accent": "#E4E6EF",
+    "background": "#FFFFFF",
+    "textPrimary": "#000000",
+    "link": "#00FFFF"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Aeonik",
+      "heading": "Aeonik"
+    },
+    "fontStacks": {
+      "heading": [
+        "Aeonik"
+      ],
+      "body": [
+        "Aeonik"
+      ],
+      "paragraph": [
+        "Aeonik"
+      ]
+    },
+    "fontSizes": {
+      "h1": "48px",
+      "h2": "28.8px",
+      "body": "16.8px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "15px"
+  },
+  "components": {
+    "input": {
+      "borderColor": "#CCCCCC",
+      "borderRadius": "15px"
+    },
+    "buttonPrimary": {
+      "background": "#E4E6EF",
+      "textColor": "#000000",
+      "borderRadius": "105px",
+      "shadow": "none"
+    },
+    "buttonSecondary": {
+      "background": "#2B2E3A",
+      "textColor": "#FFFFFF",
+      "borderRadius": "105px",
+      "shadow": "none"
+    }
+  },
+  "images": {
+    "logo": "File saved at: attached_assets/logo.svg",
+    "favicon": "File saved at: attached_assets/favicon.png",
+    "ogImage": "File saved at: attached_assets/ogImage.jpg"
+  },
+  "__framework_hints": [],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Logo #0 matches the brand name 'Lusion - Realise Your Creative Ideas' and is visible in the header, linking to the homepage, making it the main brand logo.",
+    "confidence": 0.95
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": 2,
+      "text": "MenuClose",
+      "reasoning": "Button #2 has a vibrant background color (#E4E6EF) which stands out compared to the other buttons. It also has action-oriented text ('MenuClose'), making it the most likely candidate for the primary CTA."
+    },
+    "secondary": {
+      "index": 1,
+      "text": "Let's talk",
+      "reasoning": "Button #1 has a neutral background color (#2B2E3A) and is distinct from the primary button's color. It also has a clear call to action ('Let's talk'), making it suitable as the secondary button."
+    },
+    "confidence": 0.9
+  },
+  "personality": {
+    "tone": "modern",
+    "energy": "medium",
+    "targetAudience": "creative professionals"
+  },
+  "designSystem": {
+    "framework": "unknown",
+    "componentLibrary": null
+  },
+  "confidence": {
+    "buttons": 0.9,
+    "colors": 0.95,
+    "overall": 0.925
+  }
+}

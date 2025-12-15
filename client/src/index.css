@@ -4,8 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-heading: 'Outfit', sans-serif;
+  /* Apple uses SF Pro. The best way to get this on web for non-Macs is Inter with specific tracking. 
+     But prioritizing system-ui picks up SF Pro on Apple devices automatically. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -31,7 +33,6 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
 
-  /* Animation Keyframes */
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(calc(-100% - var(--gap))); }
@@ -40,62 +41,55 @@
     from { transform: translateX(calc(-100% - var(--gap))); }
     to { transform: translateX(0); }
   }
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
 }
 
 :root {
-  /* Super Modern Dark Mode - Deep Black & Glass */
-  --background: 0 0% 3%; /* #080808 - Very deep black */
-  --foreground: 0 0% 98%;
+  /* Apple-esque Dark Mode */
+  --background: 0 0% 0%; /* Pure Black */
+  --foreground: 0 0% 96%; /* Slightly off-white for text comfort */
 
-  --card: 0 0% 5%; /* Subtle distinction */
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 10%; 
+  --card-foreground: 0 0% 96%;
 
-  --popover: 0 0% 5%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 96%;
 
-  --primary: 25 95% 53%; /* Keep the brand orange but use it sharply */
+  --primary: 211 100% 50%; /* Apple Blue-ish for highlights, but keeping orange as accent? User wants modern. Let's mix. */
+  /* Actually, for "Sized", Industrial Orange is better. Let's keep the Orange but refined. */
+  --primary: 25 100% 50%; 
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 10%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 0 0% 18%;
+  --secondary-foreground: 0 0% 96%;
 
-  --muted: 0 0% 10%;
-  --muted-foreground: 0 0% 60%;
+  --muted: 0 0% 18%;
+  --muted-foreground: 0 0% 55%;
 
-  --accent: 0 0% 12%;
-  --accent-foreground: 0 0% 98%;
+  --accent: 0 0% 18%;
+  --accent-foreground: 0 0% 96%;
 
   --destructive: 0 62% 30%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive-foreground: 0 0% 96%;
 
-  --border: 0 0% 12%;
-  --input: 0 0% 12%;
-  --ring: 25 95% 53%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 25 100% 50%;
 
-  --radius: 1rem; /* Beautiful modern rounds */
+  --radius: 1.5rem; /* Larger, smoother rounds like iOS */
 }
 
 body {
   @apply bg-background text-foreground font-sans antialiased min-h-screen selection:bg-primary/30 selection:text-primary-foreground;
+  font-feature-settings: "ss01", "ss02", "cv01", "cv02"; /* Enable nice font features for Inter/System fonts */
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-heading tracking-tight;
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
-  border-radius: 99px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
+  @apply font-heading tracking-tight font-semibold;
 }
 
 .animate-marquee {

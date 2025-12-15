@@ -1,7 +1,6 @@
 import { Hammer, Sofa, Palette, Gift, Printer, PenTool, ArrowUpRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { MeasureHover } from "@/components/ui/measure-hover";
 
 const services = [
   {
@@ -37,8 +36,6 @@ const services = [
 ];
 
 export function Services() {
-  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
     <section id="services" className="py-32 bg-black relative overflow-hidden">
       <div className="container mx-auto px-4">
@@ -56,45 +53,26 @@ export function Services() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, idx) => (
-            <div
-              key={idx}
-              className="relative group block p-2 h-full w-full"
-              onMouseEnter={() => setHoveredIndex(idx)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <AnimatePresence>
-                {hoveredIndex === idx && (
-                  <motion.span
-                    className="absolute inset-0 h-full w-full bg-neutral-900/[0.8] block rounded-3xl"
-                    layoutId="hoverBackground"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: { duration: 0.15 },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      transition: { duration: 0.15, delay: 0.2 },
-                    }}
-                  />
-                )}
-              </AnimatePresence>
-              <div className="rounded-2xl h-full w-full p-8 overflow-hidden bg-black border border-white/5 relative z-20 group-hover:border-white/10 transition-colors">
-                <div className="relative z-50">
-                  <div className="p-3 bg-white/5 w-fit rounded-xl mb-6 group-hover:bg-primary/20 transition-colors">
+            <MeasureHover key={idx}>
+              <div className="group h-full p-8 bg-neutral-900/20 border border-white/5 hover:bg-neutral-900/40 transition-all duration-500 rounded-xl relative overflow-hidden">
+                <div className="relative z-10">
+                  <div className="p-3 bg-white/5 w-fit rounded-lg mb-6 group-hover:bg-primary/20 transition-colors">
                     <service.icon className="w-6 h-6 text-white group-hover:text-primary transition-colors" />
                   </div>
-                  <h4 className="text-white font-bold tracking-wide mt-4 text-xl font-heading">
+                  <h4 className="text-white font-bold tracking-tight mt-4 text-xl font-heading">
                     {service.title}
                   </h4>
                   <p className="mt-4 text-neutral-400 tracking-wide leading-relaxed text-sm">
                     {service.description}
                   </p>
                 </div>
+                
+                {/* Subtle Grid Background on Hover */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:20px_20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </div>
-            </div>
+            </MeasureHover>
           ))}
         </div>
       </div>
