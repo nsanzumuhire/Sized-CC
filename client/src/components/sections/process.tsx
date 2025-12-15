@@ -1,105 +1,66 @@
-import { CheckCircle2 } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const steps = [
   {
-    number: "01",
-    title: "Tell Us Your Idea",
-    description: "Share your concept, design specs, sizing requirements, and material preferences.",
+    num: "01",
+    title: "Concept",
+    desc: "We analyze your requirements and feasibility.",
   },
   {
-    number: "02",
-    title: "Design & Mockups",
-    description: "Our engineers create detailed digital mockups for your review and approval.",
+    num: "02",
+    title: "Design",
+    desc: "3D Modeling and engineering specifications.",
   },
   {
-    number: "03",
-    title: "Confirm Your Order",
-    description: "Price agreement, payment processing, and final design sign-off to begin.",
+    num: "03",
+    title: "Fabricate",
+    desc: "Laser cutting, bending, and assembly.",
   },
   {
-    number: "04",
-    title: "Production & Delivery",
-    description: "Precision manufacturing followed by express delivery or professional installation.",
-  },
-  {
-    number: "05",
-    title: "Enjoy Your Order",
-    description: "Receive your high-quality, custom-fabricated product built to last.",
+    num: "04",
+    title: "Finish",
+    desc: "Powder coating, polishing, and installation.",
   },
 ];
 
 export function Process() {
-  const ref = useRef(null);
+  const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
+    target: targetRef,
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-55%"]);
 
   return (
-    <section id="process" ref={ref} className="py-24 bg-neutral-950 border-t border-white/5 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="mb-16 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold font-heading text-white mb-4"
-          >
-            Our Process
-          </motion.h2>
-          <p className="text-muted-foreground">
-            From concept to concrete reality in 5 simple steps.
-          </p>
+    <section ref={targetRef} className="relative h-[300vh] bg-neutral-950">
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+        <div className="absolute top-20 left-8 md:left-20 z-10">
+          <h2 className="text-4xl md:text-6xl font-bold font-heading text-white mb-2">Workflow</h2>
+          <p className="text-neutral-500">Scroll to explore how we work.</p>
         </div>
-
-        <div className="relative max-w-5xl mx-auto">
-          {/* Animated Vertical Line for Desktop */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 hidden md:block">
-            <motion.div 
-              style={{ height: lineHeight }} 
-              className="w-full bg-gradient-to-b from-primary via-primary to-transparent"
-            />
+        
+        <motion.div style={{ x }} className="flex gap-8 pl-[20vw]">
+          {steps.map((step, i) => (
+            <div
+              key={i}
+              className="group relative h-[450px] w-[350px] md:h-[500px] md:w-[400px] flex-shrink-0 overflow-hidden rounded-3xl bg-neutral-900 border border-white/5 hover:border-white/20 transition-colors"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-6 right-8 text-8xl font-bold text-white/5 font-heading">
+                {step.num}
+              </div>
+              <div className="absolute bottom-0 left-0 w-full p-8">
+                <h3 className="text-3xl font-bold text-white mb-3 font-heading">{step.title}</h3>
+                <p className="text-lg text-neutral-400">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+          {/* Add a final card for CTA */}
+          <div className="group relative h-[450px] w-[350px] md:h-[500px] md:w-[400px] flex-shrink-0 overflow-hidden rounded-3xl bg-primary flex items-center justify-center">
+             <h3 className="text-4xl font-bold text-white text-center font-heading">Ready to <br/>Start?</h3>
           </div>
-
-          <div className="space-y-12 md:space-y-24">
-            {steps.map((step, index) => (
-              <motion.div 
-                key={index} 
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`flex flex-col md:flex-row gap-8 md:gap-16 items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-              >
-                
-                {/* Content Side */}
-                <div className="flex-1 w-full md:w-1/2">
-                  <div className={`bg-background/50 backdrop-blur-sm border border-white/10 p-6 md:p-10 hover:border-primary/50 transition-colors relative group rounded-lg ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                    <span className="text-6xl md:text-8xl font-bold font-heading text-white/5 absolute -top-8 right-4 group-hover:text-primary/10 transition-colors select-none z-0">
-                      {step.number}
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-heading relative z-10">
-                      {step.title}
-                    </h3>
-                    <p className="text-neutral-400 relative z-10 text-lg leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Center Marker */}
-                <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-neutral-950 border-2 border-primary z-10 flex items-center justify-center hidden md:flex shadow-[0_0_15px_rgba(249,115,22,0.5)]">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-                </div>
-
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

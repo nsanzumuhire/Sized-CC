@@ -1,50 +1,156 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import React from "react";
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none text-white group-hover:text-primary transition-colors">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-white/80 transition-colors">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const links = [
-    { href: "#services", label: "Services" },
-    { href: "#process", label: "Process" },
-    { href: "#portfolio", label: "Portfolio" },
-    { href: "#contact", label: "Contact" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+    <nav 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+        scrolled 
+          ? "bg-black/60 backdrop-blur-xl border-white/5 h-16" 
+          : "bg-transparent border-transparent h-20"
+      )}
+    >
+      <div className="container mx-auto px-4 h-full flex items-center justify-between">
         <Link href="/">
-          <a className="text-2xl font-bold font-heading tracking-tighter text-white">
+          <a className="text-2xl font-bold font-heading tracking-tighter text-white flex items-center gap-1">
             SIZED<span className="text-primary">.CC</span>
           </a>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-          <Button variant="default" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-none font-bold">
-            Request Quote
+        {/* Desktop Nav - Apple Style */}
+        <div className="hidden md:flex items-center justify-center flex-1 px-8">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-white/80 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5">Services</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-neutral-950/90 backdrop-blur-xl border border-white/10">
+                    <li className="row-span-3">
+                      <NavigationMenuLink asChild>
+                        <a
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-white/5"
+                          href="/"
+                        >
+                          <div className="mb-2 mt-4 text-lg font-medium text-white">
+                            Fabrication
+                          </div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Precision engineering for industrial and artistic applications.
+                          </p>
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <ListItem href="#services" title="Signage">
+                      2D & 3D installations, vehicle wraps, and wayfinding.
+                    </ListItem>
+                    <ListItem href="#services" title="Furniture">
+                      Custom steel tables, chairs, and office fitouts.
+                    </ListItem>
+                    <ListItem href="#services" title="Branding">
+                      Physical branding assets and commercial identity.
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-white/80 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5">Process</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-neutral-950/90 backdrop-blur-xl border border-white/10">
+                    <ListItem href="#process" title="Consultation">
+                      Tell us your idea and requirements.
+                    </ListItem>
+                    <ListItem href="#process" title="Design">
+                      Digital mockups and engineering specs.
+                    </ListItem>
+                    <ListItem href="#process" title="Production">
+                      Laser cutting and assembly.
+                    </ListItem>
+                    <ListItem href="#process" title="Installation">
+                      On-site setup and delivery.
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Link href="#portfolio">
+                  <a className={navigationMenuTriggerStyle() + " bg-transparent text-white/80 hover:text-white hover:bg-white/5"}>
+                    Portfolio
+                  </a>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        <div className="hidden md:flex items-center gap-4">
+          <Button variant="ghost" className="text-white hover:text-primary hover:bg-white/5 rounded-full text-sm font-medium">
+            Log in
+          </Button>
+          <Button className="bg-white text-black hover:bg-white/90 rounded-full text-sm font-semibold px-6 shadow-lg shadow-white/5">
+            Get Quote
           </Button>
         </div>
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-white p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X /> : <Menu />}
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
@@ -53,22 +159,16 @@ export function Navbar() {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-white/10 bg-background overflow-hidden"
+            className="md:hidden fixed inset-0 top-16 bg-black z-40 overflow-y-auto"
           >
-            <div className="flex flex-col p-4 gap-4">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-lg font-medium text-white hover:text-primary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <Button className="w-full bg-primary text-primary-foreground rounded-none font-bold">
+            <div className="flex flex-col p-6 gap-6">
+              <a href="#services" className="text-2xl font-medium text-white" onClick={() => setIsOpen(false)}>Services</a>
+              <a href="#process" className="text-2xl font-medium text-white" onClick={() => setIsOpen(false)}>Process</a>
+              <a href="#portfolio" className="text-2xl font-medium text-white" onClick={() => setIsOpen(false)}>Portfolio</a>
+              <a href="#contact" className="text-2xl font-medium text-white" onClick={() => setIsOpen(false)}>Contact</a>
+              <Button className="w-full bg-white text-black rounded-full py-6 text-lg font-bold mt-4">
                 Request Quote
               </Button>
             </div>

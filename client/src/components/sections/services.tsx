@@ -1,107 +1,102 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Hammer, Sofa, Palette, Gift, Printer, PenTool } from "lucide-react";
-import { motion } from "framer-motion";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { Hammer, Sofa, Palette, Gift, Printer, PenTool, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const services = [
   {
     title: "Signage",
-    description: "2D & 3D signage, embossed & reflective signs, indoor & outdoor installations.",
+    description: "2D & 3D signage, embossed & reflective signs.",
     icon: Hammer,
   },
   {
     title: "Branding",
-    description: "Vehicle wrapping, wall branding, and commercial identity implementation.",
+    description: "Vehicle wrapping and commercial identity.",
     icon: Palette,
   },
   {
     title: "Furniture",
-    description: "Custom metal furniture, tables, and interior fixtures for home & office.",
+    description: "Custom metal furniture and interior fixtures.",
     icon: Sofa,
   },
   {
     title: "Home Décor",
-    description: "Exclusive wall décor, custom-sized art pieces, and decorative elements.",
+    description: "Exclusive wall décor and custom art pieces.",
     icon: PenTool,
   },
   {
-    title: "Personalized Gifts",
-    description: "Trophies, medals, table décor, and ceremonial gifts built to last.",
+    title: "Gifts",
+    description: "Trophies, medals, and ceremonial gifts.",
     icon: Gift,
   },
   {
-    title: "Print & Promo",
-    description: "High-quality wallpapers, 2D/3D stickers, and promotional materials.",
+    title: "Print",
+    description: "High-quality wallpapers and 3D stickers.",
     icon: Printer,
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-};
-
 export function Services() {
+  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
-    <section id="services" className="py-24 bg-background relative border-t border-white/5">
+    <section id="services" className="py-32 bg-black relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 space-y-4">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold font-heading text-white"
-          >
-            What We Do
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground max-w-2xl mx-auto"
-          >
-            Industrial-grade fabrication services for commercial and residential projects.
-          </motion.p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold font-heading text-white tracking-tight">
+              Our Expertise
+            </h2>
+            <p className="text-neutral-400 max-w-md">
+              High-performance fabrication services designed for scalability and precision.
+            </p>
+          </div>
+          <button className="text-white flex items-center gap-2 hover:text-primary transition-colors text-sm font-medium border-b border-white/20 pb-1 hover:border-primary">
+            View Full Service Catalog <ArrowUpRight className="w-4 h-4" />
+          </button>
         </div>
 
-        <motion.div 
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {services.map((service, index) => (
-            <motion.div key={index} variants={item}>
-              <div className="h-full group relative bg-neutral-900 border border-white/10 overflow-hidden hover:border-primary/50 transition-colors duration-500">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="p-8 relative z-10">
-                  <div className="w-14 h-14 bg-neutral-800 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-500 rounded-sm">
-                    <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-500" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10">
+          {services.map((service, idx) => (
+            <div
+              key={idx}
+              className="relative group block p-2 h-full w-full"
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <AnimatePresence>
+                {hoveredIndex === idx && (
+                  <motion.span
+                    className="absolute inset-0 h-full w-full bg-neutral-900/[0.8] block rounded-3xl"
+                    layoutId="hoverBackground"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { duration: 0.15 },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      transition: { duration: 0.15, delay: 0.2 },
+                    }}
+                  />
+                )}
+              </AnimatePresence>
+              <div className="rounded-2xl h-full w-full p-8 overflow-hidden bg-black border border-white/5 relative z-20 group-hover:border-white/10 transition-colors">
+                <div className="relative z-50">
+                  <div className="p-3 bg-white/5 w-fit rounded-xl mb-6 group-hover:bg-primary/20 transition-colors">
+                    <service.icon className="w-6 h-6 text-white group-hover:text-primary transition-colors" />
                   </div>
-                  <h3 className="text-xl font-bold text-white font-heading mb-3 group-hover:translate-x-2 transition-transform duration-300">
+                  <h4 className="text-white font-bold tracking-wide mt-4 text-xl font-heading">
                     {service.title}
-                  </h3>
-                  <p className="text-neutral-400 group-hover:text-neutral-300 transition-colors">
+                  </h4>
+                  <p className="mt-4 text-neutral-400 tracking-wide leading-relaxed text-sm">
                     {service.description}
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
