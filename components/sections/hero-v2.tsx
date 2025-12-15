@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MouseGradient } from "@/components/ui/mouse-gradient";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { ProcessStepper } from "@/components/ui/process-stepper";
+import { CursorPrecision } from "@/components/ui/cursor-precision";
 import { ArrowRight, Crosshair } from "lucide-react";
 
 const stats = [
@@ -29,64 +29,39 @@ export function HeroV2() {
       ref={containerRef}
       className="relative min-h-screen w-full bg-black overflow-hidden"
     >
-      {/* Mouse-following gradient */}
-      <MouseGradient />
-
-      {/* Animated gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute -top-1/2 -left-1/4 w-[600px] h-[600px] rounded-full opacity-50"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%)",
-          }}
-          animate={{
-            x: [0, 80, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-1/4 right-0 w-[500px] h-[500px] rounded-full opacity-40"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%)",
-          }}
-          animate={{
-            x: [0, -60, 0],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
-      {/* Grid pattern */}
+      {/* Simple grid background */}
       <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.8) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.8) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
           `,
           backgroundSize: "80px 80px",
         }}
       />
 
-      {/* Main content - Split Layout */}
+      {/* Subtle gradient orb */}
+      <div
+        className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full opacity-40 -translate-x-1/4 -translate-y-1/4"
+        style={{
+          background: "radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 60%)",
+        }}
+      />
+
+      {/* Cursor precision - only shows when cursor moves */}
+      <CursorPrecision />
+
+      {/* Vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_80%)] pointer-events-none" />
+
+      {/* Main content */}
       <motion.div
         style={{ opacity, y }}
         className="relative z-10 container mx-auto px-4 pt-28 pb-16 min-h-screen flex items-center"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 w-full items-center">
-          {/* LEFT SIDE - Compact Content */}
+          {/* LEFT SIDE */}
           <div className="space-y-8">
             {/* Badge */}
             <motion.div
@@ -179,12 +154,12 @@ export function HeroV2() {
               ))}
             </motion.div>
 
-            {/* Technical specs line */}
+            {/* Tech specs */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center gap-4 text-[10px] font-mono text-white/25 uppercase tracking-widest pt-2"
+              className="flex items-center gap-4 text-[10px] font-mono text-white/30 uppercase tracking-widest pt-2"
             >
               <span className="flex items-center gap-1.5">
                 <span className="w-1 h-1 bg-primary rounded-full" />
@@ -201,27 +176,26 @@ export function HeroV2() {
             </motion.div>
           </div>
 
-          {/* RIGHT SIDE - Interactive Process Stepper */}
+          {/* RIGHT SIDE - Process Stepper */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative h-[480px] lg:h-[520px]"
           >
-            {/* Decorative frame */}
+            {/* Simple frame */}
             <div className="absolute -inset-4 rounded-3xl border border-white/5 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-primary/20 rounded-tr-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-primary/20 rounded-bl-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-primary/20 rounded-tr-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-12 h-12 border-b border-l border-primary/20 rounded-bl-3xl pointer-events-none" />
 
-            {/* Process title */}
+            {/* Title */}
             <div className="absolute -top-8 left-0 flex items-center gap-2">
               <span className="text-xs font-mono text-primary uppercase tracking-widest">
-                How It Works
+                Our Process
               </span>
-              <div className="w-12 h-[1px] bg-gradient-to-r from-primary/50 to-transparent" />
+              <div className="w-8 h-[1px] bg-primary/30" />
             </div>
 
-            {/* Process Stepper Component */}
             <ProcessStepper />
           </motion.div>
         </div>
@@ -232,7 +206,7 @@ export function HeroV2() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
@@ -242,20 +216,6 @@ export function HeroV2() {
           <div className="w-1 h-1.5 rounded-full bg-white/40" />
         </motion.div>
       </motion.div>
-
-      {/* Corner decorations */}
-      <div className="absolute top-24 left-6 hidden xl:block">
-        <div className="text-[9px] font-mono text-white/20 space-y-0.5">
-          <div>SYS: ONLINE</div>
-          <div>PRECISION: MAX</div>
-        </div>
-      </div>
-      <div className="absolute top-24 right-6 hidden xl:block text-right">
-        <div className="text-[9px] font-mono text-white/20 space-y-0.5">
-          <div>SIZED.CC</div>
-          <div>v3.0</div>
-        </div>
-      </div>
     </section>
   );
 }

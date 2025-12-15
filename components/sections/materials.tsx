@@ -12,53 +12,33 @@ const materials = [
   "Titanium Grade 5",
   "Acrylic",
   "Polycarbonate",
-];
-
-const partners = [
-  "SpaceX",
-  "Tesla",
-  "Boeing",
-  "NASA",
-  "Lockheed Martin",
-  "Northrop Grumman",
-  "Raytheon",
-  "General Dynamics",
+  "Galvanized Steel",
+  "Bronze",
+  "Zinc Alloy",
 ];
 
 export function Materials() {
   return (
-    <section className="py-10 bg-black border-y border-white/5 relative overflow-hidden">
+    <section className="py-8 bg-black border-y border-white/5 relative overflow-hidden">
+      {/* Edge fade */}
       <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none" />
 
-      <div className="mb-4">
-        <p className="text-center text-xs font-medium text-neutral-500 uppercase tracking-widest mb-6">
-          Trusted Materials & Partners
-        </p>
+      <p className="text-center text-xs font-medium text-neutral-500 uppercase tracking-widest mb-6">
+        Trusted Materials
+      </p>
 
-        <Marquee speed={40} className="mb-4">
-          {materials.map((item, i) => (
-            <div
-              key={i}
-              className="px-8 py-2 mx-2 border border-white/5 rounded-full bg-white/5 backdrop-blur-sm"
-            >
-              <span className="text-sm font-medium text-neutral-400 whitespace-nowrap">
-                {item}
-              </span>
-            </div>
-          ))}
-        </Marquee>
-
-        <Marquee speed={30} direction="right">
-          {partners.map((item, i) => (
-            <div key={i} className="px-8 py-2 mx-2">
-              <span className="text-lg font-bold text-neutral-600 hover:text-white transition-colors whitespace-nowrap cursor-default">
-                {item}
-              </span>
-            </div>
-          ))}
-        </Marquee>
-      </div>
+      <Marquee speed={50} direction="left" pauseOnHover>
+        {materials.map((item, i) => (
+          <div
+            key={i}
+            className="px-6 py-2 mx-2 border border-white/5 rounded-full bg-white/5 backdrop-blur-sm hover:border-primary/30 transition-colors"
+          >
+            <span className="text-sm font-medium text-neutral-400 whitespace-nowrap">
+              {item}
+            </span>
+          </div>
+        ))}
+      </Marquee>
     </section>
   );
 }
-

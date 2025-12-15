@@ -54,7 +54,7 @@ export function Services() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold font-heading text-white tracking-tight">
-              Our Expertise
+              Our Services
             </h2>
             <p className="text-neutral-400 max-w-md">
               High-performance fabrication services designed for scalability and
@@ -62,7 +62,7 @@ export function Services() {
             </p>
           </div>
           <button className="text-white flex items-center gap-2 hover:text-primary transition-colors text-sm font-medium border-b border-white/20 pb-1 hover:border-primary">
-            View Full Service Catalog <ArrowUpRight className="w-4 h-4" />
+            View Full Catalog <ArrowUpRight className="w-4 h-4" />
           </button>
         </div>
 
@@ -91,4 +91,3 @@ export function Services() {
     </section>
   );
 }
-

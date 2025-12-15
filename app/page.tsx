@@ -3,7 +3,6 @@ import { Footer } from "@/components/layout/footer";
 import { HeroV2 } from "@/components/sections/hero-v2";
 import { Materials } from "@/components/sections/materials";
 import { Services } from "@/components/sections/services";
-import { Process } from "@/components/sections/process";
 import { TechnicalSpecs } from "@/components/sections/technical-specs";
 import { Portfolio } from "@/components/sections/portfolio";
 import { Features } from "@/components/sections/features";
@@ -18,7 +17,6 @@ export default function Home() {
         <Materials />
         <Services />
         <TechnicalSpecs />
-        <Process />
         <Portfolio />
         <Features />
         <CTA />
