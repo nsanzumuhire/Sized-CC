@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface LensProps {
@@ -13,10 +13,9 @@ interface LensProps {
 
 export const Lens = ({ 
   children, 
-  lensSize = 200, 
+  lensSize = 250, 
   zoomFactor = 1.1,
   className,
-  isHovering = false
 }: LensProps) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -34,53 +33,39 @@ export const Lens = ({
     <div 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={cn("relative overflow-hidden cursor-none", className)}
+      className={cn("relative overflow-hidden cursor-crosshair", className)}
     >
-      {/* Base Content */}
-      <div className="w-full h-full grayscale-[0.8] opacity-50 blur-[1px] transition-all duration-500">
+      {/* Base Content - Dark & Gritty */}
+      <div className="w-full h-full grayscale opacity-30 transition-all duration-500">
         {children}
       </div>
 
-      {/* Lens Content */}
+      {/* Lens Content - The "X-Ray" Reveal */}
       <motion.div
-        className="absolute inset-0 pointer-events-none mix-blend-normal overflow-hidden rounded-full border border-white/20 shadow-[0_0_50px_rgba(255,255,255,0.2)]"
+        className="absolute inset-0 pointer-events-none overflow-hidden rounded-full border-[2px] border-primary/50 shadow-[0_0_30px_rgba(249,115,22,0.4)] backdrop-brightness-150"
         animate={{
           WebkitMaskPosition: `${position.x - lensSize / 2}px ${position.y - lensSize / 2}px`,
           WebkitMaskSize: `${lensSize}px ${lensSize}px`,
         } as any}
-        transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
+        transition={{ type: "tween", ease: "backOut", duration: 0.15 }}
         style={{
           maskImage: `radial-gradient(circle ${lensSize / 2}px at ${position.x}px ${position.y}px, black 100%, transparent 100%)`,
           WebkitMaskImage: `radial-gradient(circle ${lensSize / 2}px at ${position.x}px ${position.y}px, black 100%, transparent 100%)`,
           WebkitMaskRepeat: "no-repeat",
         }}
       >
-        {/* The content inside the lens is the same, but full color/sharpness/zoomed */}
+        {/* The content inside the lens - Inverted/High Contrast for "Blueprint" feel */}
         <div 
-          className="w-full h-full scale-[1.01]"
+          className="w-full h-full scale-[1.05] contrast-125 saturate-0 brightness-150 invert"
           style={{
              transformOrigin: `${position.x}px ${position.y}px`
           }}
         >
           {children}
           
-          {/* Measurement UI inside Lens */}
-          <div className="absolute inset-0 pointer-events-none">
-             <div 
-               className="absolute w-full h-[1px] bg-primary/50"
-               style={{ top: position.y }}
-             />
-             <div 
-               className="absolute h-full w-[1px] bg-primary/50"
-               style={{ left: position.x }}
-             />
-             <div 
-               className="absolute text-[10px] font-mono text-primary bg-black/50 px-1 rounded"
-               style={{ top: position.y + 10, left: position.x + 10 }}
-             >
-               X:{Math.round(position.x)} Y:{Math.round(position.y)}
-             </div>
-          </div>
+          {/* Tech Overlay in Lens */}
+          <div className="absolute inset-0 bg-primary/10 mix-blend-overlay pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:10px_10px] opacity-20 pointer-events-none" />
         </div>
       </motion.div>
     </div>
