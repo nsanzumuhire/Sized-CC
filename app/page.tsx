@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { Hero } from "@/components/sections/hero";
+import { HeroV2 } from "@/components/sections/hero-v2";
 import { Materials } from "@/components/sections/materials";
 import { Services } from "@/components/sections/services";
 import { Process } from "@/components/sections/process";
@@ -14,7 +14,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white overflow-x-hidden">
       <Navbar />
       <main>
-        <Hero />
+        <HeroV2 />
         <Materials />
         <Services />
         <TechnicalSpecs />
