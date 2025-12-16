@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import { QuoteModalProvider } from "@/components/providers/quote-modal-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { QuoteModal } from "@/components/ui/quote-modal";
@@ -267,6 +268,7 @@ export default function RootLayout({
             <QuoteModal />
           </QuoteModalProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
