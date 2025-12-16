@@ -8,82 +8,143 @@ import {
   CheckCircle, 
   Truck, 
   Sparkles,
-  ArrowRight 
+  ArrowRight,
+  Clock,
+  Play,
+  Pause
 } from "lucide-react";
+import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 
 const steps = [
   {
     num: "01",
     title: "Tell Us Your Idea",
-    desc: "Share your concept, design, size, and material.",
+    desc: "Share your concept, design, size, and material requirements. We'll discuss feasibility and provide initial guidance.",
+    timeframe: "Day 1",
     icon: Lightbulb,
     color: "from-amber-500 to-orange-600",
+    glowColor: "rgba(245,158,11,0.4)",
   },
   {
     num: "02",
     title: "Design & Mockups",
-    desc: "We send mockups for review and revisions.",
+    desc: "Our team creates detailed 3D mockups and engineering specs for your review. Unlimited revisions until perfect.",
+    timeframe: "2-3 Days",
     icon: PenTool,
     color: "from-orange-500 to-red-500",
+    glowColor: "rgba(249,115,22,0.4)",
   },
   {
     num: "03",
     title: "Confirm Your Order",
-    desc: "Price agreed → payment → design approved → production starts.",
+    desc: "Price agreed → payment processed → design approved → production queue confirmed.",
+    timeframe: "Day 4",
     icon: CheckCircle,
     color: "from-green-500 to-emerald-600",
+    glowColor: "rgba(34,197,94,0.4)",
   },
   {
     num: "04",
     title: "Production & Delivery",
-    desc: "Express or scheduled delivery, installation if required.",
+    desc: "Precision fabrication with state-of-the-art machinery. Express or scheduled delivery with installation if required.",
+    timeframe: "5-10 Days",
     icon: Truck,
     color: "from-blue-500 to-cyan-500",
+    glowColor: "rgba(59,130,246,0.4)",
   },
   {
     num: "05",
     title: "Enjoy Your Order",
-    desc: "Precision-crafted results, built to last.",
+    desc: "Precision-crafted results, built to last. Quality guaranteed with our satisfaction promise.",
+    timeframe: "Complete",
     icon: Sparkles,
     color: "from-purple-500 to-pink-500",
+    glowColor: "rgba(168,85,247,0.4)",
   },
 ];
 
 export function ProcessStepper() {
   const [activeStep, setActiveStep] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const { openModal } = useQuoteModal();
 
+  // Auto-play through steps
   useEffect(() => {
     if (!isAutoPlaying) return;
     
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        setActiveStep((prev) => Math.min(prev + 1, steps.length - 1));
+        setIsAutoPlaying(false);
+        setTimeout(() => setIsAutoPlaying(true), 10000);
+      } else if (e.key === "ArrowLeft") {
+        setActiveStep((prev) => Math.max(prev - 1, 0));
+        setIsAutoPlaying(false);
+        setTimeout(() => setIsAutoPlaying(true), 10000);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const handleStepClick = (index: number) => {
     setActiveStep(index);
     setIsAutoPlaying(false);
-    // Resume autoplay after 10 seconds of inactivity
     setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying);
   };
 
   return (
     <div className="relative h-full flex flex-col">
-      {/* Progress bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-white/5 rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-primary to-orange-400"
-          initial={{ width: 0 }}
-          animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
-          transition={{ duration: 0.5 }}
-        />
+      {/* Floating glow effect */}
+      <motion.div 
+        className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full opacity-30 blur-3xl pointer-events-none"
+        animate={{
+          background: `radial-gradient(circle, ${steps[activeStep].glowColor} 0%, transparent 70%)`,
+        }}
+        transition={{ duration: 0.8 }}
+      />
+
+      {/* Top bar with progress and controls */}
+      <div className="flex items-center gap-3 mb-6">
+        {/* Progress bar */}
+        <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-primary to-orange-400"
+            initial={{ width: 0 }}
+            animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
+            transition={{ duration: 0.5 }}
+          />
+        </div>
+        
+        {/* Auto-play toggle */}
+        <button
+          onClick={toggleAutoPlay}
+          className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+          title={isAutoPlaying ? "Pause" : "Play"}
+        >
+          {isAutoPlaying ? (
+            <Pause className="w-3 h-3 text-primary" />
+          ) : (
+            <Play className="w-3 h-3 text-primary" />
+          )}
+        </button>
       </div>
 
-      {/* Step indicators */}
-      <div className="flex items-center justify-between mt-6 mb-8">
+      {/* Step indicators with icons */}
+      <div className="flex items-center justify-between mb-8">
         {steps.map((step, i) => (
           <button
             key={i}
@@ -91,34 +152,37 @@ export function ProcessStepper() {
             className="relative group"
           >
             <motion.div
-              className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+              className={`w-11 h-11 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                 i === activeStep
-                  ? "border-primary bg-primary/20"
+                  ? "border-primary bg-primary/20 shadow-[0_0_20px_rgba(249,115,22,0.3)]"
                   : i < activeStep
                   ? "border-primary/50 bg-primary/10"
-                  : "border-white/10 bg-white/5"
+                  : "border-white/10 bg-white/5 hover:border-white/20"
               }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span
-                className={`text-xs font-bold ${
+              <step.icon 
+                className={`w-4 h-4 transition-colors ${
                   i <= activeStep ? "text-primary" : "text-white/30"
-                }`}
-              >
-                {step.num}
-              </span>
+                }`} 
+              />
             </motion.div>
+            
+            {/* Step label on hover */}
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+              <span className="text-[10px] font-mono text-neutral-500">{step.num}</span>
+            </div>
             
             {/* Connector line */}
             {i < steps.length - 1 && (
-              <div className="absolute top-1/2 left-full w-[calc(100%-2.5rem)] h-[2px] -translate-y-1/2 hidden sm:block">
-                <div className="h-full bg-white/10" />
+              <div className="absolute top-1/2 left-full w-[calc(100%-2.75rem)] h-[2px] -translate-y-1/2 hidden sm:block">
+                <div className="h-full bg-white/10 rounded-full" />
                 <motion.div
-                  className="absolute top-0 left-0 h-full bg-primary"
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-orange-400 rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: i < activeStep ? "100%" : "0%" }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                 />
               </div>
             )}
@@ -127,80 +191,130 @@ export function ProcessStepper() {
       </div>
 
       {/* Active step content */}
-      <div className="flex-1 relative">
+      <div className="flex-1 relative min-h-[320px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeStep}
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute inset-0"
           >
-            <div className="h-full p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] to-white/[0.01] border border-white/10 backdrop-blur-sm">
-              {/* Step icon */}
-              <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${steps[activeStep].color} mb-6`}>
-                {(() => {
-                  const Icon = steps[activeStep].icon;
-                  return <Icon className="w-8 h-8 text-white" />;
-                })()}
+            <div className="h-full p-6 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 backdrop-blur-sm overflow-hidden">
+              {/* Decorative corner */}
+              <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden pointer-events-none">
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${steps[activeStep].color} opacity-10 transform rotate-45 translate-x-16 -translate-y-16`} />
               </div>
 
-              {/* Step number badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-4 ml-4">
-                <span className="text-xs font-mono text-primary">
-                  Step {steps[activeStep].num}
-                </span>
+              {/* Icon and badges row */}
+              <div className="flex items-start justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  {/* Step icon */}
+                  <motion.div 
+                    className={`p-3.5 rounded-xl bg-gradient-to-br ${steps[activeStep].color} shadow-lg`}
+                    initial={{ rotate: -10, scale: 0.8 }}
+                    animate={{ rotate: 0, scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200 }}
+                  >
+                    {(() => {
+                      const Icon = steps[activeStep].icon;
+                      return <Icon className="w-7 h-7 text-white" />;
+                    })()}
+                  </motion.div>
+
+                  {/* Badges */}
+                  <div className="flex flex-col gap-1.5">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                      <span className="text-[10px] font-mono text-primary uppercase tracking-wider">
+                        Step {steps[activeStep].num}
+                      </span>
+                    </div>
+                    <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20">
+                      <Clock className="w-2.5 h-2.5 text-primary" />
+                      <span className="text-[10px] font-mono text-primary">
+                        {steps[activeStep].timeframe}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step counter */}
+                <div className="text-right">
+                  <span className="text-3xl font-bold font-heading text-white/10">
+                    {steps[activeStep].num}
+                  </span>
+                  <span className="text-lg text-white/5">/05</span>
+                </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-4">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-3">
                 {steps[activeStep].title}
               </h3>
 
               {/* Description */}
-              <p className="text-neutral-400 leading-relaxed mb-6">
+              <p className="text-neutral-400 leading-relaxed text-sm mb-6">
                 {steps[activeStep].desc}
               </p>
 
-              {/* Visual indicator */}
-              <div className="flex items-center gap-3">
-                <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
-                  <motion.div
-                    className={`h-full bg-gradient-to-r ${steps[activeStep].color}`}
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 2.8, ease: "linear" }}
-                    key={`progress-${activeStep}`}
-                  />
-                </div>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+              {/* CTA for last step or progress indicator */}
+              {activeStep === steps.length - 1 ? (
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  onClick={openModal}
+                  className="px-6 py-3 bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white rounded-full font-semibold text-sm hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all group"
                 >
-                  <ArrowRight className="w-5 h-5 text-white/30" />
-                </motion.div>
-              </div>
+                  Start Your Project
+                  <ArrowRight className="inline-block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+                    <motion.div
+                      className={`h-full bg-gradient-to-r ${steps[activeStep].color}`}
+                      initial={{ width: 0 }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: 3.8, ease: "linear" }}
+                      key={`progress-${activeStep}`}
+                    />
+                  </div>
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-4 h-4 text-white/30" />
+                  </motion.div>
+                </div>
+              )}
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Bottom indicator dots */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center items-center gap-2 mt-6">
         {steps.map((_, i) => (
           <button
             key={i}
             onClick={() => handleStepClick(i)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+            className={`h-2 rounded-full transition-all duration-300 ${
               i === activeStep
-                ? "w-6 bg-primary"
-                : "bg-white/20 hover:bg-white/40"
+                ? "w-8 bg-gradient-to-r from-primary to-orange-400"
+                : "w-2 bg-white/20 hover:bg-white/40"
             }`}
           />
         ))}
       </div>
+
+      {/* Keyboard hint */}
+      <div className="mt-4 flex justify-center">
+        <span className="text-[10px] text-neutral-600 font-mono">
+          Use ← → arrows to navigate
+        </span>
+      </div>
     </div>
   );
 }
-

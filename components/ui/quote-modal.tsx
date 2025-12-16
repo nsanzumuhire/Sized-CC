@@ -5,15 +5,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, User, Phone, Briefcase, MessageSquare } from "lucide-react";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const services = [
-  "Signage",
-  "Branding",
-  "Furniture",
-  "Home Décor",
-  "Gifts",
-  "Print",
-  "Other",
+  { value: "signage", label: "Signage" },
+  { value: "branding", label: "Branding" },
+  { value: "furniture", label: "Furniture & Interior" },
+  { value: "decor", label: "Home Décor & Artworks" },
+  { value: "gifts", label: "Personalized Gifts" },
+  { value: "print", label: "Print & Promotional" },
+  { value: "other", label: "Other" },
 ];
 
 const WHATSAPP_NUMBER = "250784226895";
@@ -41,11 +48,13 @@ export function QuoteModal() {
     e.preventDefault();
     if (!validate()) return;
 
+    const selectedService = services.find(s => s.value === formData.service)?.label || formData.service;
+
     const message = `🔶 *New Quote Request*
 
 *Name:* ${formData.name}
 *Phone:* ${formData.phone}
-*Service:* ${formData.service}
+*Service:* ${selectedService}
 *Message:* ${formData.message || "No additional details"}`;
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -58,12 +67,19 @@ export function QuoteModal() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleServiceChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, service: value }));
+    if (errors.service) {
+      setErrors((prev) => ({ ...prev, service: "" }));
     }
   };
 
@@ -153,49 +169,37 @@ export function QuoteModal() {
                   )}
                 </div>
 
-                {/* Service */}
+                {/* Service - Using shadcn Select */}
                 <div>
                   <label className="block text-sm font-medium text-neutral-300 mb-2">
                     Service *
                   </label>
                   <div className="relative">
-                    <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      className={`w-full pl-11 pr-4 py-3 bg-black/50 border ${
-                        errors.service ? "border-red-500" : "border-white/10"
-                      } rounded-xl text-white focus:outline-none focus:border-primary/50 transition-colors appearance-none cursor-pointer`}
-                    >
-                      <option value="" className="bg-neutral-900">
-                        Select a service
-                      </option>
-                      {services.map((service) => (
-                        <option
-                          key={service}
-                          value={service}
-                          className="bg-neutral-900"
-                        >
-                          {service}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg
-                        className="w-5 h-5 text-neutral-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 z-10 pointer-events-none" />
+                    <Select value={formData.service} onValueChange={handleServiceChange}>
+                      <SelectTrigger 
+                        className={`w-full h-12 pl-11 pr-4 bg-black/50 border ${
+                          errors.service ? "border-red-500" : "border-white/10"
+                        } rounded-xl text-white focus:border-primary/50 focus:ring-0 focus:ring-offset-0 [&>span]:text-left`}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </div>
+                        <SelectValue placeholder="Select a service" />
+                      </SelectTrigger>
+                      <SelectContent 
+                        className="bg-neutral-900 border border-white/10 rounded-xl shadow-2xl"
+                        position="popper"
+                        sideOffset={4}
+                      >
+                        {services.map((service) => (
+                          <SelectItem
+                            key={service.value}
+                            value={service.value}
+                            className="text-white hover:bg-white/10 focus:bg-white/10 focus:text-white rounded-lg cursor-pointer py-3 px-3"
+                          >
+                            {service.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   {errors.service && (
                     <p className="text-red-500 text-xs mt-1">{errors.service}</p>
@@ -237,5 +241,3 @@ export function QuoteModal() {
     </AnimatePresence>
   );
 }
-
-
