@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { QuoteModalProvider } from "@/components/providers/quote-modal-provider";
+import { QuoteModal } from "@/components/ui/quote-modal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -96,7 +98,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen overflow-x-hidden">{children}</body>
+      <body className="min-h-screen overflow-x-hidden">
+        <QuoteModalProvider>
+          {children}
+          <QuoteModal />
+        </QuoteModalProvider>
+      </body>
     </html>
   );
 }

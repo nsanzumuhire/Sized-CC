@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { ProcessStepper } from "@/components/ui/process-stepper";
 import { CursorPrecision } from "@/components/ui/cursor-precision";
+import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { ArrowRight, Crosshair } from "lucide-react";
 
 const stats = [
@@ -16,6 +17,7 @@ const stats = [
 
 export function HeroV2() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { openModal } = useQuoteModal();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -115,6 +117,7 @@ export function HeroV2() {
             >
               <Button
                 size="lg"
+                onClick={openModal}
                 className="h-12 px-6 bg-primary hover:bg-primary/90 text-white font-semibold text-sm rounded-lg shadow-[0_0_30px_rgba(249,115,22,0.25)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] transition-all duration-300 group"
               >
                 <Crosshair className="w-4 h-4 mr-2" />

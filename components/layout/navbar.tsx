@@ -14,6 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -48,6 +49,7 @@ ListItem.displayName = "ListItem";
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { openModal } = useQuoteModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,15 +69,26 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
-        <Link
-          href="/"
-          className="text-2xl font-bold font-heading tracking-tighter text-white flex items-center gap-1"
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          SIZED<span className="text-primary">.CC</span>
-        </Link>
+          <Link
+            href="/"
+            className="text-2xl font-bold font-heading tracking-tighter text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
+          >
+            SIZED<span className="text-primary">.CC</span>
+          </Link>
+        </motion.div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center justify-center flex-1 px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="hidden md:flex items-center justify-center flex-1 px-8"
+        >
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -136,39 +149,85 @@ export function Navbar() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link
-                  href="#portfolio"
-                  className={
-                    navigationMenuTriggerStyle() +
-                    " bg-transparent text-white/80 hover:text-white hover:bg-white/5"
-                  }
-                >
-                  Portfolio
-                </Link>
+                <NavigationMenuLink asChild>
+                  <a
+                    href="#portfolio"
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200"
+                    )}
+                  >
+                    Portfolio
+                  </a>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <a
+                    href="#faq"
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200"
+                    )}
+                  >
+                    FAQ
+                  </a>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <a
+                    href="#contact"
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200"
+                    )}
+                  >
+                    Contact
+                  </a>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-        </div>
+        </motion.div>
 
-        <div className="hidden md:flex items-center gap-4">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="hidden md:flex items-center gap-4"
+        >
           <Button
             variant="ghost"
             className="text-white hover:text-primary hover:bg-white/5 rounded-full text-sm font-medium"
           >
             Log in
           </Button>
-          <Button className="bg-white text-black hover:bg-white/90 rounded-full text-sm font-semibold px-6 shadow-lg shadow-white/5">
+          <Button 
+            onClick={openModal}
+            className="bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white hover:opacity-90 rounded-full text-sm font-semibold px-6 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all duration-300"
+          >
             Get Quote
           </Button>
-        </div>
+        </motion.div>
 
         {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-white p-2"
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          <motion.div
+            animate={{ rotate: isOpen ? 90 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </motion.div>
+        </motion.button>
       </div>
 
       {/* Mobile Nav */}
@@ -180,38 +239,38 @@ export function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden fixed inset-0 top-16 bg-black z-40 overflow-y-auto"
           >
-            <div className="flex flex-col p-6 gap-6">
-              <a
-                href="#services"
-                className="text-2xl font-medium text-white"
-                onClick={() => setIsOpen(false)}
+            <div className="flex flex-col p-6 gap-4">
+              {[
+                { href: "#services", label: "Services" },
+                { href: "#process", label: "Process" },
+                { href: "#portfolio", label: "Portfolio" },
+                { href: "#faq", label: "FAQ" },
+                { href: "#contact", label: "Contact" },
+              ].map((item, index) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  className="text-2xl font-medium text-white hover:text-primary transition-colors duration-200 py-2 border-b border-white/5 hover:border-primary/30"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.3 }}
               >
-                Services
-              </a>
-              <a
-                href="#process"
-                className="text-2xl font-medium text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                Process
-              </a>
-              <a
-                href="#portfolio"
-                className="text-2xl font-medium text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                Portfolio
-              </a>
-              <a
-                href="#contact"
-                className="text-2xl font-medium text-white"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </a>
-              <Button className="w-full bg-white text-black rounded-full py-6 text-lg font-bold mt-4">
-                Request Quote
-              </Button>
+                <Button 
+                  onClick={() => { setIsOpen(false); openModal(); }}
+                  className="w-full bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white rounded-full py-6 text-lg font-bold mt-4 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all duration-300"
+                >
+                  Request Quote
+                </Button>
+              </motion.div>
             </div>
           </motion.div>
         )}

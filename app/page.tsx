@@ -6,6 +6,7 @@ import { Services } from "@/components/sections/services";
 import { TechnicalSpecs } from "@/components/sections/technical-specs";
 import { Portfolio } from "@/components/sections/portfolio";
 import { Features } from "@/components/sections/features";
+import { FAQ } from "@/components/sections/faq";
 import { CTA } from "@/components/sections/cta";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <TechnicalSpecs />
         <Portfolio />
         <Features />
+        <FAQ />
         <CTA />
       </main>
       <Footer />
