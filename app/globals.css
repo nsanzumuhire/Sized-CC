@@ -1,33 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: hsl(0 0% 0%);
-  --color-foreground: hsl(0 0% 96%);
-  
-  --color-card: hsl(0 0% 10%);
-  --color-card-foreground: hsl(0 0% 96%);
-  
-  --color-popover: hsl(0 0% 10%);
-  --color-popover-foreground: hsl(0 0% 96%);
-  
   --color-primary: hsl(25 100% 50%);
   --color-primary-foreground: hsl(0 0% 100%);
-  
-  --color-secondary: hsl(0 0% 18%);
-  --color-secondary-foreground: hsl(0 0% 96%);
-  
-  --color-muted: hsl(0 0% 18%);
-  --color-muted-foreground: hsl(0 0% 55%);
-  
-  --color-accent: hsl(0 0% 18%);
-  --color-accent-foreground: hsl(0 0% 96%);
-  
-  --color-destructive: hsl(0 62% 30%);
-  --color-destructive-foreground: hsl(0 0% 96%);
-  
-  --color-border: hsl(0 0% 18%);
-  --color-input: hsl(0 0% 18%);
-  --color-ring: hsl(25 100% 50%);
   
   --radius-lg: 0.5rem;
   --radius-md: calc(0.5rem - 2px);
@@ -56,14 +31,61 @@
   }
 }
 
+/* Light theme (base) */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+  --primary: 25 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 10%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 10%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 90%;
+  --input: 0 0% 90%;
+  --ring: 25 100% 50%;
+}
+
+/* Dark theme */
+.dark {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 96%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 96%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 25 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 18%;
+  --secondary-foreground: 0 0% 96%;
+  --muted: 0 0% 18%;
+  --muted-foreground: 0 0% 55%;
+  --accent: 0 0% 18%;
+  --accent-foreground: 0 0% 96%;
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 0 0% 96%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 25 100% 50%;
+}
+
 @layer base {
   * {
-    border-color: var(--color-border);
+    border-color: hsl(var(--border));
   }
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
@@ -83,24 +105,24 @@
   transform: translateY(0);
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-muted);
+  background: hsl(var(--muted));
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted-foreground);
+  background: hsl(var(--muted-foreground));
 }
 
 /* Selection styling */
 ::selection {
-  background: hsl(25 100% 50% / 0.3);
-  color: var(--color-primary-foreground);
+  background: hsl(var(--primary) / 0.3);
+  color: hsl(var(--primary-foreground));
 }

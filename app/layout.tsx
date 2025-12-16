@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { QuoteModalProvider } from "@/components/providers/quote-modal-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { QuoteModal } from "@/components/ui/quote-modal";
 
 const inter = Inter({
@@ -71,7 +72,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -99,10 +100,17 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen overflow-x-hidden">
-        <QuoteModalProvider>
-          {children}
-          <QuoteModal />
-        </QuoteModalProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <QuoteModalProvider>
+            {children}
+            <QuoteModal />
+          </QuoteModalProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

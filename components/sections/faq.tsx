@@ -35,7 +35,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-32 bg-black border-t border-white/5">
+    <section id="faq" className="py-32 bg-black border-t border-white/5 scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left - Title */}

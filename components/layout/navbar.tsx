@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -33,10 +34,10 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none text-white group-hover:text-primary transition-colors">
+          <div className="text-sm font-medium leading-none text-black dark:text-white group-hover:text-primary transition-colors">
             {title}
           </div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-white/80 transition-colors">
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-black/80 dark:group-hover:text-white/80 transition-colors">
             {children}
           </p>
         </a>
@@ -64,7 +65,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
         scrolled
-          ? "bg-black/60 backdrop-blur-xl border-white/5 h-16"
+          ? "bg-white/80 dark:bg-black/60 backdrop-blur-xl border-black/5 dark:border-white/5 h-16"
           : "bg-transparent border-transparent h-20"
       )}
     >
@@ -76,7 +77,7 @@ export function Navbar() {
         >
           <Link
             href="/"
-            className="text-2xl font-bold font-heading tracking-tighter text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="text-2xl font-bold font-heading tracking-tighter text-black dark:text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
           >
             SIZED<span className="text-primary">.CC</span>
           </Link>
@@ -92,18 +93,18 @@ export function Navbar() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/80 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5">
+                <NavigationMenuTrigger className="bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 data-[state=open]:bg-black/5 dark:data-[state=open]:bg-white/5">
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-neutral-950/90 backdrop-blur-xl border border-white/10">
+                  <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <a
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-neutral-900 to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-white/5"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-black/5 dark:border-white/5"
                           href="#services"
                         >
-                          <div className="mb-2 mt-4 text-lg font-medium text-white">
+                          <div className="mb-2 mt-4 text-lg font-medium text-black dark:text-white">
                             Fabrication
                           </div>
                           <p className="text-sm leading-tight text-muted-foreground">
@@ -127,11 +128,11 @@ export function Navbar() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white/80 hover:text-white hover:bg-white/5 data-[state=open]:bg-white/5">
+                <NavigationMenuTrigger className="bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 data-[state=open]:bg-black/5 dark:data-[state=open]:bg-white/5">
                   Process
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-neutral-950/90 backdrop-blur-xl border border-white/10">
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
                     <ListItem href="#process" title="Consultation">
                       Tell us your idea and requirements.
                     </ListItem>
@@ -154,7 +155,7 @@ export function Navbar() {
                     href="#portfolio"
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200"
+                      "bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200"
                     )}
                   >
                     Portfolio
@@ -168,7 +169,7 @@ export function Navbar() {
                     href="#faq"
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200"
+                      "bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200"
                     )}
                   >
                     FAQ
@@ -182,7 +183,7 @@ export function Navbar() {
                     href="#contact"
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "bg-transparent text-white/80 hover:text-white hover:bg-white/5 transition-all duration-200"
+                      "bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200"
                     )}
                   >
                     Contact
@@ -197,11 +198,12 @@ export function Navbar() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="hidden md:flex items-center gap-4"
+          className="hidden md:flex items-center gap-3"
         >
+          <ThemeToggle />
           <Button
             variant="ghost"
-            className="text-white hover:text-primary hover:bg-white/5 rounded-full text-sm font-medium"
+            className="text-black dark:text-white hover:text-primary hover:bg-black/5 dark:hover:bg-white/5 rounded-full text-sm font-medium"
           >
             Log in
           </Button>
@@ -214,20 +216,23 @@ export function Navbar() {
         </motion.div>
 
         {/* Mobile Toggle */}
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <motion.div
-            animate={{ rotate: isOpen ? 90 : 0 }}
-            transition={{ duration: 0.2 }}
+        <div className="md:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-black dark:text-white p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </motion.div>
-        </motion.button>
+            <motion.div
+              animate={{ rotate: isOpen ? 90 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </motion.div>
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Nav */}
@@ -237,7 +242,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden fixed inset-0 top-16 bg-black z-40 overflow-y-auto"
+            className="md:hidden fixed inset-0 top-16 bg-white dark:bg-black z-40 overflow-y-auto"
           >
             <div className="flex flex-col p-6 gap-4">
               {[
@@ -253,7 +258,7 @@ export function Navbar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.3 }}
-                  className="text-2xl font-medium text-white hover:text-primary transition-colors duration-200 py-2 border-b border-white/5 hover:border-primary/30"
+                  className="text-2xl font-medium text-black dark:text-white hover:text-primary transition-colors duration-200 py-2 border-b border-black/10 dark:border-white/5 hover:border-primary/30"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
@@ -278,4 +283,3 @@ export function Navbar() {
     </nav>
   );
 }
-

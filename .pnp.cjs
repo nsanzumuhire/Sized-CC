@@ -48,6 +48,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:12.23.26"],\
           ["lucide-react", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:0.545.0"],\
           ["next", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:15.5.9"],\
+          ["next-themes", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:0.4.6"],\
           ["postcss", "npm:8.5.6"],\
           ["react", "npm:19.2.3"],\
           ["react-dom", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:19.2.3"],\
@@ -2255,6 +2256,32 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["next-themes", [\
+      ["npm:0.4.6", {\
+        "packageLocation": "../../.yarn/berry/cache/next-themes-npm-0.4.6-7c480d5b1d-10c0.zip/node_modules/next-themes/",\
+        "packageDependencies": [\
+          ["next-themes", "npm:0.4.6"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:0.4.6", {\
+        "packageLocation": "./.yarn/__virtual__/next-themes-virtual-340da89159/3/.yarn/berry/cache/next-themes-npm-0.4.6-7c480d5b1d-10c0.zip/node_modules/next-themes/",\
+        "packageDependencies": [\
+          ["@types/react", "npm:19.2.7"],\
+          ["@types/react-dom", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:19.2.3"],\
+          ["next-themes", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:0.4.6"],\
+          ["react", "npm:19.2.3"],\
+          ["react-dom", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:19.2.3"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["picocolors", [\
       ["npm:1.1.1", {\
         "packageLocation": "../../.yarn/berry/cache/picocolors-npm-1.1.1-4fede47cf1-10c0.zip/node_modules/picocolors/",\
@@ -2471,6 +2498,7 @@ const RAW_RUNTIME_STATE =
           ["framer-motion", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:12.23.26"],\
           ["lucide-react", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:0.545.0"],\
           ["next", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:15.5.9"],\
+          ["next-themes", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:0.4.6"],\
           ["postcss", "npm:8.5.6"],\
           ["react", "npm:19.2.3"],\
           ["react-dom", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:19.2.3"],\

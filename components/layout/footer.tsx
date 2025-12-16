@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="bg-background border-t border-white/10 pt-16 pb-8">
+    <footer id="contact" className="bg-background border-t border-white/10 pt-16 pb-8 scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="space-y-4">
