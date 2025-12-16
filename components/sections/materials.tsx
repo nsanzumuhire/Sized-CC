@@ -19,9 +19,9 @@ const materials = [
 
 export function Materials() {
   return (
-    <section className="py-8 bg-black border-y border-white/5 relative overflow-hidden">
+    <section className="py-8 bg-white dark:bg-black border-y border-black/5 dark:border-white/5 relative overflow-hidden">
       {/* Edge fade */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white dark:from-black dark:via-transparent dark:to-black z-10 pointer-events-none" />
 
       <p className="text-center text-xs font-medium text-neutral-500 uppercase tracking-widest mb-6">
         Trusted Materials
@@ -31,9 +31,9 @@ export function Materials() {
         {materials.map((item, i) => (
           <div
             key={i}
-            className="px-6 py-2 mx-2 border border-white/5 rounded-full bg-white/5 backdrop-blur-sm hover:border-primary/30 transition-colors"
+            className="px-6 py-2 mx-2 border border-black/5 dark:border-white/5 rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-sm hover:border-primary/30 transition-colors"
           >
-            <span className="text-sm font-medium text-neutral-400 whitespace-nowrap">
+            <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400 whitespace-nowrap">
               {item}
             </span>
           </div>

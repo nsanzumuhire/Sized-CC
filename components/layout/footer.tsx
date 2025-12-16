@@ -1,10 +1,10 @@
 export function Footer() {
   return (
-    <footer id="contact" className="bg-background border-t border-white/10 pt-16 pb-8 scroll-mt-20">
+    <footer id="contact" className="bg-white dark:bg-black border-t border-black/10 dark:border-white/10 pt-16 pb-8 scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold font-heading text-white">
+            <h3 className="text-2xl font-bold font-heading text-black dark:text-white">
               SIZED<span className="text-primary">.CC</span>
             </h3>
             <p className="text-muted-foreground text-sm">
@@ -14,7 +14,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-4">Services</h4>
+            <h4 className="font-bold text-black dark:text-white mb-4">Services</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
@@ -40,7 +40,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-4">Company</h4>
+            <h4 className="font-bold text-black dark:text-white mb-4">Company</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
@@ -66,7 +66,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-white mb-4">Contact</h4>
+            <h4 className="font-bold text-black dark:text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>info@sized.cc</li>
               <li>+250 783 801 575</li>
@@ -75,7 +75,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-black/10 dark:border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} SIZED.CC. All rights reserved.
           </p>

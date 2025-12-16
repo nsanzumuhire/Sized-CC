@@ -14,7 +14,7 @@ const specs = [
 
 export function TechnicalSpecs() {
   return (
-    <section className="py-32 bg-neutral-950 overflow-hidden">
+    <section className="py-32 bg-neutral-100 dark:bg-neutral-950 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* LEFT SIDE - Title & Description */}
@@ -41,15 +41,15 @@ export function TechnicalSpecs() {
 
             <div className="relative">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 mb-6">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest font-mono">
+                <span className="text-xs font-medium text-neutral-600 dark:text-neutral-400 uppercase tracking-widest font-mono">
                   SYS.TECH_SPECS
                 </span>
               </div>
 
               {/* Headline */}
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-white tracking-tight mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-black dark:text-white tracking-tight mb-6">
                 Technical
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
@@ -58,24 +58,24 @@ export function TechnicalSpecs() {
               </h2>
 
               {/* Description */}
-              <p className="text-neutral-400 text-lg leading-relaxed mb-8 max-w-md">
+              <p className="text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed mb-8 max-w-md">
                 State-of-the-art machinery meeting aerospace and medical industry standards. Precision engineering at scale.
               </p>
 
               {/* Tech stats row */}
               <div className="flex items-center gap-8 mb-8">
                 <div className="text-center">
-                  <div className="text-3xl font-bold font-heading text-white">99.9<span className="text-primary text-lg">%</span></div>
+                  <div className="text-3xl font-bold font-heading text-black dark:text-white">99.9<span className="text-primary text-lg">%</span></div>
                   <div className="text-[10px] text-neutral-500 uppercase tracking-widest">Accuracy</div>
                 </div>
-                <div className="w-px h-12 bg-white/10" />
+                <div className="w-px h-12 bg-black/10 dark:bg-white/10" />
                 <div className="text-center">
-                  <div className="text-3xl font-bold font-heading text-white">ISO<span className="text-primary text-lg"> 9001</span></div>
+                  <div className="text-3xl font-bold font-heading text-black dark:text-white">ISO<span className="text-primary text-lg"> 9001</span></div>
                   <div className="text-[10px] text-neutral-500 uppercase tracking-widest">Certified</div>
                 </div>
-                <div className="w-px h-12 bg-white/10" />
+                <div className="w-px h-12 bg-black/10 dark:bg-white/10" />
                 <div className="text-center">
-                  <div className="text-3xl font-bold font-heading text-white">24<span className="text-primary text-lg">hr</span></div>
+                  <div className="text-3xl font-bold font-heading text-black dark:text-white">24<span className="text-primary text-lg">hr</span></div>
                   <div className="text-[10px] text-neutral-500 uppercase tracking-widest">Turnaround</div>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export function TechnicalSpecs() {
                   viewport={{ once: true }}
                   className="group relative"
                 >
-                  <div className="relative p-5 rounded-xl bg-neutral-900/80 border border-white/5 hover:border-primary/30 transition-all duration-300 overflow-hidden">
+                  <div className="relative p-5 rounded-xl bg-white/80 dark:bg-neutral-900/80 border border-black/5 dark:border-white/5 hover:border-primary/30 transition-all duration-300 overflow-hidden">
                     {/* Hover gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
@@ -125,7 +125,7 @@ export function TechnicalSpecs() {
 
                       {/* Value Display */}
                       <div className="flex items-baseline gap-1 mb-1">
-                        <span className="text-3xl font-bold font-heading text-white group-hover:text-primary transition-colors">
+                        <span className="text-3xl font-bold font-heading text-black dark:text-white group-hover:text-primary transition-colors">
                           {spec.value}
                         </span>
                         <span className="text-sm font-mono text-primary/80">
@@ -151,7 +151,7 @@ export function TechnicalSpecs() {
             {/* Bottom technical label */}
             <div className="mt-6 flex items-center justify-end gap-2">
               <div className="w-8 h-px bg-primary/30" />
-              <span className="text-[10px] font-mono text-neutral-600 uppercase tracking-widest">
+              <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-600 uppercase tracking-widest">
                 SPECS.V2.4
               </span>
             </div>

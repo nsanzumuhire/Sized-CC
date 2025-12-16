@@ -35,26 +35,26 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-32 bg-black border-t border-white/5 scroll-mt-20">
+    <section id="faq" className="py-32 bg-white dark:bg-black border-t border-black/5 dark:border-white/5 scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left - Title */}
           <div className="lg:sticky lg:top-32 lg:h-fit">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 mb-6">
               <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest">
+              <span className="text-xs font-medium text-neutral-600 dark:text-neutral-400 uppercase tracking-widest">
                 Got Questions?
               </span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold font-heading text-white tracking-tight mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold font-heading text-black dark:text-white tracking-tight mb-6">
               Frequently Asked{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
                 Questions
               </span>
             </h2>
             
-            <p className="text-neutral-400 text-lg leading-relaxed">
+            <p className="text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
               Everything you need to know about our fabrication process, materials, and services.
             </p>
           </div>
@@ -64,14 +64,14 @@ export function FAQ() {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="border border-white/5 rounded-xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                className="border border-black/5 dark:border-white/5 rounded-xl overflow-hidden bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-colors"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left"
                 >
-                  <span className="font-medium text-white pr-4">{faq.question}</span>
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                  <span className="font-medium text-black dark:text-white pr-4">{faq.question}</span>
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center">
                     {openIndex === index ? (
                       <Minus className="w-4 h-4 text-primary" />
                     ) : (
@@ -89,7 +89,7 @@ export function FAQ() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <div className="px-6 pb-5">
-                        <p className="text-neutral-400 text-sm leading-relaxed">
+                        <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
                           {faq.answer}
                         </p>
                       </div>

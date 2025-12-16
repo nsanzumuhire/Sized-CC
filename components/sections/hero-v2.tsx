@@ -29,11 +29,21 @@ export function HeroV2() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full bg-black overflow-hidden"
+      className="relative min-h-screen w-full bg-white dark:bg-black overflow-hidden"
     >
       {/* Simple grid background */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.04] dark:opacity-[0.02]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(0,0,0,0.5) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0,0,0,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-0 dark:opacity-[0.02]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
@@ -55,7 +65,7 @@ export function HeroV2() {
       <CursorPrecision />
 
       {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_80%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(255,255,255,0.3)_80%)] dark:bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_80%)] pointer-events-none" />
 
       {/* Main content */}
       <motion.div
@@ -71,7 +81,7 @@ export function HeroV2() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 dark:bg-primary/10 border border-primary/20">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
@@ -89,7 +99,7 @@ export function HeroV2() {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight leading-[1.1]">
-                <span className="text-white">Metal Cutting &</span>
+                <span className="text-black dark:text-white">Metal Cutting &</span>
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
                   Custom Fabrication
@@ -102,7 +112,7 @@ export function HeroV2() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base md:text-lg text-neutral-400 max-w-md leading-relaxed"
+              className="text-base md:text-lg text-neutral-600 dark:text-neutral-400 max-w-md leading-relaxed"
             >
               Custom signage, furniture, branding, and décor — built to exact
               size with industrial precision.
@@ -127,7 +137,7 @@ export function HeroV2() {
               <Button
                 variant="outline"
                 size="lg"
-                className="h-12 px-6 border-white/15 bg-white/5 text-white hover:bg-white/10 hover:border-white/25 font-medium text-sm rounded-lg backdrop-blur-sm transition-all"
+                className="h-12 px-6 border-black/15 dark:border-white/15 bg-black/5 dark:bg-white/5 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10 hover:border-black/25 dark:hover:border-white/25 font-medium text-sm rounded-lg backdrop-blur-sm transition-all"
               >
                 View Our Work
               </Button>
@@ -142,7 +152,7 @@ export function HeroV2() {
             >
               {stats.map((stat, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold font-heading text-white">
+                  <div className="text-2xl md:text-3xl font-bold font-heading text-black dark:text-white">
                     <AnimatedCounter
                       value={stat.value}
                       suffix={stat.suffix}
@@ -150,7 +160,7 @@ export function HeroV2() {
                       decimals={stat.value < 1 ? 2 : stat.value % 1 !== 0 ? 1 : 0}
                     />
                   </div>
-                  <div className="text-[10px] text-neutral-500 uppercase tracking-widest mt-1">
+                  <div className="text-[10px] text-neutral-500 dark:text-neutral-500 uppercase tracking-widest mt-1">
                     {stat.label}
                   </div>
                 </div>
@@ -162,7 +172,7 @@ export function HeroV2() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center gap-4 text-[10px] font-mono text-white/30 uppercase tracking-widest pt-2"
+              className="flex items-center gap-4 text-[10px] font-mono text-black/40 dark:text-white/30 uppercase tracking-widest pt-2"
             >
               <span className="flex items-center gap-1.5">
                 <span className="w-1 h-1 bg-primary rounded-full" />
@@ -188,7 +198,7 @@ export function HeroV2() {
             className="relative h-[480px] lg:h-[520px] scroll-mt-24"
           >
             {/* Simple frame */}
-            <div className="absolute -inset-4 rounded-3xl border border-white/5 pointer-events-none" />
+            <div className="absolute -inset-4 rounded-3xl border border-black/5 dark:border-white/5 pointer-events-none" />
             <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-primary/20 rounded-tr-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-12 h-12 border-b border-l border-primary/20 rounded-bl-3xl pointer-events-none" />
 
@@ -215,9 +225,9 @@ export function HeroV2() {
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-5 h-8 rounded-full border border-white/20 flex justify-center pt-1.5"
+          className="w-5 h-8 rounded-full border border-black/20 dark:border-white/20 flex justify-center pt-1.5"
         >
-          <div className="w-1 h-1.5 rounded-full bg-white/40" />
+          <div className="w-1 h-1.5 rounded-full bg-black/40 dark:bg-white/40" />
         </motion.div>
       </motion.div>
     </section>

@@ -61,7 +61,7 @@ export const MeasureHover = ({ children, color = "primary" }: MeasureHoverProps)
         transition={{ duration: 0.3 }}
       >
         <div className={cn(
-          "absolute -top-4 left-1/2 -translate-x-1/2 bg-black/80 px-1 text-[9px] font-mono",
+          "absolute -top-4 left-1/2 -translate-x-1/2 bg-white/80 dark:bg-black/80 px-1 text-[9px] font-mono",
           styles.text
         )}>
           WIDTH
@@ -79,7 +79,7 @@ export const MeasureHover = ({ children, color = "primary" }: MeasureHoverProps)
         transition={{ duration: 0.3 }}
       >
         <div className={cn(
-          "absolute top-1/2 -right-4 -translate-y-1/2 rotate-90 bg-black/80 px-1 text-[9px] font-mono origin-center",
+          "absolute top-1/2 -right-4 -translate-y-1/2 rotate-90 bg-white/80 dark:bg-black/80 px-1 text-[9px] font-mono origin-center",
           styles.text
         )}>
           HEIGHT
