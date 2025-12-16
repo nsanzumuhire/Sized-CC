@@ -29,15 +29,15 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
+            "block select-none space-y-1.5 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
             className
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none text-black dark:text-white group-hover:text-primary transition-colors">
+          <div className="text-sm font-semibold leading-none text-black dark:text-white group-hover:text-primary transition-colors">
             {title}
           </div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground group-hover:text-black/80 dark:group-hover:text-white/80 transition-colors">
+          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
             {children}
           </p>
         </a>
@@ -97,32 +97,59 @@ export function Navbar() {
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
+                  <ul className="grid gap-3 p-4 md:w-[500px] lg:w-[650px] lg:grid-cols-[.75fr_1fr] bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <a
-                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-neutral-100 to-neutral-200 dark:from-neutral-900 dark:to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-black/5 dark:border-white/5"
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/20 to-primary/5 dark:from-primary/10 dark:to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-primary/20 dark:border-primary/10"
                           href="#services"
                         >
                           <div className="mb-2 mt-4 text-lg font-medium text-black dark:text-white">
-                            Fabrication
+                            Custom Fabrication
                           </div>
                           <p className="text-sm leading-tight text-muted-foreground">
-                            Precision engineering for industrial and artistic
-                            applications.
+                            Precision metal cutting for signage, furniture, branding, and décor — built to exact size.
                           </p>
                         </a>
                       </NavigationMenuLink>
                     </li>
                     <ListItem href="#services" title="Signage">
-                      2D & 3D installations, vehicle wraps, and wayfinding.
-                    </ListItem>
-                    <ListItem href="#services" title="Furniture">
-                      Custom steel tables, chairs, and office fitouts.
+                      2D & 3D signage, embossed & reflective signs, indoor & outdoor installations.
                     </ListItem>
                     <ListItem href="#services" title="Branding">
-                      Physical branding assets and commercial identity.
+                      Clothes branding, commercial vehicle wrapping, wall branding & installations.
                     </ListItem>
+                    <ListItem href="#services" title="Furniture & Interior">
+                      Custom furniture & tables, interior design for homes, offices, restaurants.
+                    </ListItem>
+                    <li className="col-span-1 lg:col-span-2">
+                      <ul className="grid grid-cols-3 gap-2">
+                        <NavigationMenuLink asChild>
+                          <a
+                            href="#services"
+                            className="block select-none rounded-md p-2 text-center leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-xs font-medium text-black dark:text-white hover:text-primary transition-colors">Home Décor</div>
+                          </a>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink asChild>
+                          <a
+                            href="#services"
+                            className="block select-none rounded-md p-2 text-center leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-xs font-medium text-black dark:text-white hover:text-primary transition-colors">Gifts</div>
+                          </a>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink asChild>
+                          <a
+                            href="#services"
+                            className="block select-none rounded-md p-2 text-center leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-xs font-medium text-black dark:text-white hover:text-primary transition-colors">Print</div>
+                          </a>
+                        </NavigationMenuLink>
+                      </ul>
+                    </li>
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -132,18 +159,33 @@ export function Navbar() {
                   Process
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
-                    <ListItem href="#process" title="Consultation">
-                      Tell us your idea and requirements.
+                  <ul className="grid gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-[.65fr_1fr] bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
+                    <li className="row-span-3">
+                      <NavigationMenuLink asChild>
+                        <a
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/20 to-primary/5 dark:from-primary/10 dark:to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-primary/20 dark:border-primary/10"
+                          href="#process"
+                        >
+                          <div className="mb-2 mt-4 text-lg font-medium text-black dark:text-white">
+                            Our Process
+                          </div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            From concept to delivery — precision-crafted results, built to last.
+                          </p>
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <ListItem href="#process" title="01. Tell Us Your Idea">
+                      Share your concept, design, size, and material requirements.
                     </ListItem>
-                    <ListItem href="#process" title="Design">
-                      Digital mockups and engineering specs.
+                    <ListItem href="#process" title="02. Design & Mockups">
+                      We create detailed mockups for your review and revisions.
                     </ListItem>
-                    <ListItem href="#process" title="Production">
-                      Laser cutting and assembly.
+                    <ListItem href="#process" title="03. Confirm & Produce">
+                      Price agreed, payment processed, precision fabrication begins.
                     </ListItem>
-                    <ListItem href="#process" title="Installation">
-                      On-site setup and delivery.
+                    <ListItem href="#process" title="04. Delivery & Install">
+                      Express or scheduled delivery with installation if required.
                     </ListItem>
                   </ul>
                 </NavigationMenuContent>

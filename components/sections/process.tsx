@@ -6,23 +6,28 @@ import { motion, useScroll, useTransform } from "framer-motion";
 const steps = [
   {
     num: "01",
-    title: "Concept",
-    desc: "We analyze your requirements and feasibility.",
+    title: "Tell Us Your Idea",
+    desc: "Share your concept, design, size, and material.",
   },
   {
     num: "02",
-    title: "Design",
-    desc: "3D Modeling and engineering specifications.",
+    title: "Design & Mockups",
+    desc: "We send mockups for review and revisions.",
   },
   {
     num: "03",
-    title: "Fabricate",
-    desc: "Laser cutting, bending, and assembly.",
+    title: "Confirm Order",
+    desc: "Price agreed → payment → design approved → production starts.",
   },
   {
     num: "04",
-    title: "Finish",
-    desc: "Powder coating, polishing, and installation.",
+    title: "Production & Delivery",
+    desc: "Express or scheduled delivery, installation if required.",
+  },
+  {
+    num: "05",
+    title: "Enjoy Your Order",
+    desc: "Precision-crafted results, built to last.",
   },
 ];
 
@@ -35,7 +40,7 @@ export function Process() {
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-55%"]);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-neutral-950">
+    <section id="process" ref={targetRef} className="relative h-[300vh] bg-neutral-950 scroll-mt-20">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="absolute top-20 left-8 md:left-20 z-10">
           <h2 className="text-4xl md:text-6xl font-bold font-heading text-white mb-2">
