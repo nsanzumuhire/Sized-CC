@@ -44,6 +44,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.19.27"],\
           ["@types/react", "npm:19.2.7"],\
           ["@types/react-dom", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:19.2.3"],\
+          ["@vercel/analytics", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:1.6.1"],\
           ["class-variance-authority", "npm:0.7.1"],\
           ["clsx", "npm:2.1.1"],\
           ["framer-motion", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:12.23.26"],\
@@ -1923,6 +1924,52 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@vercel/analytics", [\
+      ["npm:1.6.1", {\
+        "packageLocation": "../../.yarn/berry/cache/@vercel-analytics-npm-1.6.1-cc058602a7-10c0.zip/node_modules/@vercel/analytics/",\
+        "packageDependencies": [\
+          ["@vercel/analytics", "npm:1.6.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:1.6.1", {\
+        "packageLocation": "./.yarn/__virtual__/@vercel-analytics-virtual-49cbc74578/3/.yarn/berry/cache/@vercel-analytics-npm-1.6.1-cc058602a7-10c0.zip/node_modules/@vercel/analytics/",\
+        "packageDependencies": [\
+          ["@remix-run/react", null],\
+          ["@sveltejs/kit", null],\
+          ["@types/next", null],\
+          ["@types/react", "npm:19.2.7"],\
+          ["@types/remix-run__react", null],\
+          ["@types/svelte", null],\
+          ["@types/sveltejs__kit", null],\
+          ["@types/vue", null],\
+          ["@types/vue-router", null],\
+          ["@vercel/analytics", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:1.6.1"],\
+          ["next", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:15.5.9"],\
+          ["react", "npm:19.2.3"],\
+          ["svelte", null],\
+          ["vue", null],\
+          ["vue-router", null]\
+        ],\
+        "packagePeers": [\
+          "@remix-run/react",\
+          "@sveltejs/kit",\
+          "@types/next",\
+          "@types/react",\
+          "@types/remix-run__react",\
+          "@types/svelte",\
+          "@types/sveltejs__kit",\
+          "@types/vue-router",\
+          "@types/vue",\
+          "next",\
+          "react",\
+          "svelte",\
+          "vue-router",\
+          "vue"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["aria-hidden", [\
       ["npm:1.2.6", {\
         "packageLocation": "../../.yarn/berry/cache/aria-hidden-npm-1.2.6-46a480bac7-10c0.zip/node_modules/aria-hidden/",\
@@ -2542,6 +2589,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.19.27"],\
           ["@types/react", "npm:19.2.7"],\
           ["@types/react-dom", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:19.2.3"],\
+          ["@vercel/analytics", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:1.6.1"],\
           ["class-variance-authority", "npm:0.7.1"],\
           ["clsx", "npm:2.1.1"],\
           ["framer-motion", "virtual:f0c123058594c0966981fa0ba46dfa4714911e04b5dfb056a263ddaac010ba0fedc8022ced3347953274bade5bba72ad647176a239493dce33a1f5ba8e909208#npm:12.23.26"],\
