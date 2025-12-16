@@ -164,7 +164,7 @@ export function Navbar() {
                       <NavigationMenuLink asChild>
                         <a
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/20 to-primary/5 dark:from-primary/10 dark:to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-primary/20 dark:border-primary/10"
-                          href="#process"
+                          href="#our-process"
                         >
                           <div className="mb-2 mt-4 text-lg font-medium text-black dark:text-white">
                             Our Process
@@ -175,16 +175,16 @@ export function Navbar() {
                         </a>
                       </NavigationMenuLink>
                     </li>
-                    <ListItem href="#process" title="01. Tell Us Your Idea">
+                    <ListItem href="#our-process" title="01. Tell Us Your Idea">
                       Share your concept, design, size, and material requirements.
                     </ListItem>
-                    <ListItem href="#process" title="02. Design & Mockups">
+                    <ListItem href="#our-process" title="02. Design & Mockups">
                       We create detailed mockups for your review and revisions.
                     </ListItem>
-                    <ListItem href="#process" title="03. Confirm & Produce">
+                    <ListItem href="#our-process" title="03. Confirm & Produce">
                       Price agreed, payment processed, precision fabrication begins.
                     </ListItem>
-                    <ListItem href="#process" title="04. Delivery & Install">
+                    <ListItem href="#our-process" title="04. Delivery & Install">
                       Express or scheduled delivery with installation if required.
                     </ListItem>
                   </ul>
@@ -289,7 +289,7 @@ export function Navbar() {
             <div className="flex flex-col p-6 gap-4">
               {[
                 { href: "#services", label: "Services" },
-                { href: "#process", label: "Process" },
+                { href: "#our-process", label: "Process" },
                 { href: "#portfolio", label: "Portfolio" },
                 { href: "#faq", label: "FAQ" },
                 { href: "#contact", label: "Contact" },

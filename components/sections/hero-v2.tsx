@@ -181,10 +181,11 @@ export function HeroV2() {
 
           {/* RIGHT SIDE - Process Stepper */}
           <motion.div
+            id="our-process"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative h-[480px] lg:h-[520px]"
+            className="relative h-[480px] lg:h-[520px] scroll-mt-24"
           >
             {/* Simple frame */}
             <div className="absolute -inset-4 rounded-3xl border border-white/5 pointer-events-none" />
