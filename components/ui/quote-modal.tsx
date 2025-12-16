@@ -104,19 +104,19 @@ export function QuoteModal() {
             transition={{ duration: 0.2 }}
             className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-50 p-4"
           >
-            <div className="bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden shadow-2xl">
               {/* Header */}
-              <div className="relative p-6 pb-4 border-b border-white/5">
+              <div className="relative p-6 pb-4 border-b border-black/5 dark:border-white/5">
                 <button
                   onClick={closeModal}
-                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 >
-                  <X className="w-5 h-5 text-neutral-400" />
+                  <X className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />
                 </button>
-                <h2 className="text-2xl font-bold font-heading text-white">
+                <h2 className="text-2xl font-bold font-heading text-black dark:text-white">
                   Request a Quote
                 </h2>
-                <p className="text-neutral-400 text-sm mt-1">
+                <p className="text-neutral-600 dark:text-neutral-400 text-sm mt-1">
                   Get a custom quote for your fabrication project.
                 </p>
               </div>
@@ -125,7 +125,7 @@ export function QuoteModal() {
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-300 mb-2">
+                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                     Full Name *
                   </label>
                   <div className="relative">
@@ -136,9 +136,9 @@ export function QuoteModal() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
-                      className={`w-full pl-11 pr-4 py-3 bg-black/50 border ${
-                        errors.name ? "border-red-500" : "border-white/10"
-                      } rounded-xl text-white placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
+                      className={`w-full pl-11 pr-4 py-3 bg-neutral-100 dark:bg-black/50 border ${
+                        errors.name ? "border-red-500" : "border-black/10 dark:border-white/10"
+                      } rounded-xl text-black dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
                     />
                   </div>
                   {errors.name && (
@@ -148,7 +148,7 @@ export function QuoteModal() {
 
                 {/* Phone */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-300 mb-2">
+                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                     Phone Number *
                   </label>
                   <div className="relative">
@@ -159,9 +159,9 @@ export function QuoteModal() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+250 7XX XXX XXX"
-                      className={`w-full pl-11 pr-4 py-3 bg-black/50 border ${
-                        errors.phone ? "border-red-500" : "border-white/10"
-                      } rounded-xl text-white placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
+                      className={`w-full pl-11 pr-4 py-3 bg-neutral-100 dark:bg-black/50 border ${
+                        errors.phone ? "border-red-500" : "border-black/10 dark:border-white/10"
+                      } rounded-xl text-black dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
                     />
                   </div>
                   {errors.phone && (
@@ -171,21 +171,21 @@ export function QuoteModal() {
 
                 {/* Service - Using shadcn Select */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-300 mb-2">
+                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                     Service *
                   </label>
                   <div className="relative">
                     <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 z-10 pointer-events-none" />
                     <Select value={formData.service} onValueChange={handleServiceChange}>
                       <SelectTrigger 
-                        className={`w-full h-12 pl-11 pr-4 bg-black/50 border ${
-                          errors.service ? "border-red-500" : "border-white/10"
-                        } rounded-xl text-white focus:border-primary/50 focus:ring-0 focus:ring-offset-0 [&>span]:text-left`}
+                        className={`w-full h-12 pl-11 pr-4 bg-neutral-100 dark:bg-black/50 border ${
+                          errors.service ? "border-red-500" : "border-black/10 dark:border-white/10"
+                        } rounded-xl text-black dark:text-white focus:border-primary/50 focus:ring-0 focus:ring-offset-0 [&>span]:text-left`}
                       >
                         <SelectValue placeholder="Select a service" />
                       </SelectTrigger>
                       <SelectContent 
-                        className="bg-neutral-900 border border-white/10 rounded-xl shadow-2xl"
+                        className="bg-white dark:bg-neutral-900 border border-black/10 dark:border-white/10 rounded-xl shadow-2xl"
                         position="popper"
                         sideOffset={4}
                       >
@@ -193,7 +193,7 @@ export function QuoteModal() {
                           <SelectItem
                             key={service.value}
                             value={service.value}
-                            className="text-white hover:bg-white/10 focus:bg-white/10 focus:text-white rounded-lg cursor-pointer py-3 px-3"
+                            className="text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10 focus:bg-black/10 dark:focus:bg-white/10 focus:text-black dark:focus:text-white rounded-lg cursor-pointer py-3 px-3"
                           >
                             {service.label}
                           </SelectItem>
@@ -208,7 +208,7 @@ export function QuoteModal() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-300 mb-2">
+                  <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
                     Message{" "}
                     <span className="text-neutral-500 font-normal">(optional)</span>
                   </label>
@@ -220,7 +220,7 @@ export function QuoteModal() {
                       onChange={handleChange}
                       placeholder="Tell us about your project..."
                       rows={3}
-                      className="w-full pl-11 pr-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors resize-none"
+                      className="w-full pl-11 pr-4 py-3 bg-neutral-100 dark:bg-black/50 border border-black/10 dark:border-white/10 rounded-xl text-black dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors resize-none"
                     />
                   </div>
                 </div>

@@ -70,7 +70,7 @@ export function CursorPrecision() {
 
       {/* Coordinate display - only when moving */}
       <motion.div
-        className="absolute px-2 py-0.5 bg-black/80 border border-primary/30 text-[9px] font-mono text-primary/80 rounded"
+        className="absolute px-2 py-0.5 bg-white/80 dark:bg-black/80 border border-primary/30 text-[9px] font-mono text-primary/80 rounded"
         style={{ left: x, top: y }}
         animate={{ 
           opacity: isMoving ? 1 : 0,

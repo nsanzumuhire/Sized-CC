@@ -49,28 +49,28 @@ const projects = [
 
 export function Portfolio() {
   return (
-    <section id="portfolio" className="py-32 bg-black border-t border-white/5">
+    <section id="portfolio" className="py-32 bg-neutral-50 dark:bg-black border-t border-black/5 dark:border-white/5">
       <div className="container mx-auto px-4">
         {/* Title */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 mb-6">
             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest">
+            <span className="text-xs font-medium text-neutral-600 dark:text-neutral-400 uppercase tracking-widest">
               Featured Work
             </span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl font-bold font-heading text-white tracking-tight mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold font-heading text-black dark:text-white tracking-tight mb-6">
             Our{" "}
             <span className="relative inline-block">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-300 to-neutral-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-black via-neutral-600 to-neutral-400 dark:from-white dark:via-neutral-300 dark:to-neutral-500">
                 Portfolio
               </span>
               <span className="absolute -bottom-2 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
             </span>
           </h2>
           
-          <p className="text-neutral-400 max-w-lg mx-auto text-lg">
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-lg mx-auto text-lg">
             A showcase of precision craftsmanship and industrial artistry.
           </p>
         </div>

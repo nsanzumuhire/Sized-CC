@@ -120,7 +120,7 @@ export function ProcessStepper() {
       {/* Top bar with progress and controls */}
       <div className="flex items-center gap-3 mb-6">
         {/* Progress bar */}
-        <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+        <div className="flex-1 h-1 bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-gradient-to-r from-primary to-orange-400"
             initial={{ width: 0 }}
@@ -132,7 +132,7 @@ export function ProcessStepper() {
         {/* Auto-play toggle */}
         <button
           onClick={toggleAutoPlay}
-          className="p-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+          className="p-2 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
           title={isAutoPlaying ? "Pause" : "Play"}
         >
           {isAutoPlaying ? (
@@ -157,14 +157,14 @@ export function ProcessStepper() {
                   ? "border-primary bg-primary/20 shadow-[0_0_20px_rgba(249,115,22,0.3)]"
                   : i < activeStep
                   ? "border-primary/50 bg-primary/10"
-                  : "border-white/10 bg-white/5 hover:border-white/20"
+                  : "border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 hover:border-black/20 dark:hover:border-white/20"
               }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
               <step.icon 
                 className={`w-4 h-4 transition-colors ${
-                  i <= activeStep ? "text-primary" : "text-white/30"
+                  i <= activeStep ? "text-primary" : "text-black/30 dark:text-white/30"
                 }`} 
               />
             </motion.div>
@@ -177,7 +177,7 @@ export function ProcessStepper() {
             {/* Connector line */}
             {i < steps.length - 1 && (
               <div className="absolute top-1/2 left-full w-[calc(100%-2.75rem)] h-[2px] -translate-y-1/2 hidden sm:block">
-                <div className="h-full bg-white/10 rounded-full" />
+                <div className="h-full bg-black/10 dark:bg-white/10 rounded-full" />
                 <motion.div
                   className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary to-orange-400 rounded-full"
                   initial={{ width: 0 }}
@@ -201,7 +201,7 @@ export function ProcessStepper() {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute inset-0"
           >
-            <div className="h-full p-6 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 backdrop-blur-sm overflow-hidden">
+            <div className="h-full p-6 rounded-2xl bg-gradient-to-br from-black/[0.04] to-black/[0.01] dark:from-white/[0.04] dark:to-white/[0.01] border border-black/10 dark:border-white/10 backdrop-blur-sm overflow-hidden">
               {/* Decorative corner */}
               <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden pointer-events-none">
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl ${steps[activeStep].color} opacity-10 transform rotate-45 translate-x-16 -translate-y-16`} />
@@ -225,7 +225,7 @@ export function ProcessStepper() {
 
                   {/* Badges */}
                   <div className="flex flex-col gap-1.5">
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10">
                       <span className="text-[10px] font-mono text-primary uppercase tracking-wider">
                         Step {steps[activeStep].num}
                       </span>
@@ -241,20 +241,20 @@ export function ProcessStepper() {
 
                 {/* Step counter */}
                 <div className="text-right">
-                  <span className="text-3xl font-bold font-heading text-white/10">
+                  <span className="text-3xl font-bold font-heading text-black/10 dark:text-white/10">
                     {steps[activeStep].num}
                   </span>
-                  <span className="text-lg text-white/5">/05</span>
+                  <span className="text-lg text-black/5 dark:text-white/5">/05</span>
                 </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-3">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold text-black dark:text-white mb-3">
                 {steps[activeStep].title}
               </h3>
 
               {/* Description */}
-              <p className="text-neutral-400 leading-relaxed text-sm mb-6">
+              <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-sm mb-6">
                 {steps[activeStep].desc}
               </p>
 
@@ -272,7 +272,7 @@ export function ProcessStepper() {
                 </motion.button>
               ) : (
                 <div className="flex items-center gap-3">
-                  <div className="flex-1 h-1 bg-white/5 rounded-full overflow-hidden">
+                  <div className="flex-1 h-1 bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
                     <motion.div
                       className={`h-full bg-gradient-to-r ${steps[activeStep].color}`}
                       initial={{ width: 0 }}
@@ -285,7 +285,7 @@ export function ProcessStepper() {
                     animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    <ArrowRight className="w-4 h-4 text-white/30" />
+                    <ArrowRight className="w-4 h-4 text-black/30 dark:text-white/30" />
                   </motion.div>
                 </div>
               )}
@@ -303,7 +303,7 @@ export function ProcessStepper() {
             className={`h-2 rounded-full transition-all duration-300 ${
               i === activeStep
                 ? "w-8 bg-gradient-to-r from-primary to-orange-400"
-                : "w-2 bg-white/20 hover:bg-white/40"
+                : "w-2 bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40"
             }`}
           />
         ))}

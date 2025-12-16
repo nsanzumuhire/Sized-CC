@@ -8,11 +8,11 @@ export const BackgroundBeams = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "absolute h-full w-full inset-0 bg-neutral-950 overflow-hidden",
+        "absolute h-full w-full inset-0 bg-neutral-50 dark:bg-neutral-950 overflow-hidden",
         className
       )}
     >
-      <div className="absolute h-full w-full inset-0 bg-neutral-950 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+      <div className="absolute h-full w-full inset-0 bg-neutral-50 dark:bg-neutral-950 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
