@@ -16,7 +16,7 @@ const stats = [
 ];
 
 export function HeroV2() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef < HTMLDivElement > (null);
   const { openModal } = useQuoteModal();
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -89,10 +89,10 @@ export function HeroV2() {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight leading-[1.1]">
-                <span className="text-white">Metal Cutting &</span>
+                <span className="text-white">Custom digital Fabrication</span>
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
-                  Custom Fabrication
+                  & Interior Design
                 </span>
               </h1>
             </motion.div>
