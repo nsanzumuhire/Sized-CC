@@ -8,6 +8,7 @@ import { ProcessStepper } from "@/components/ui/process-stepper";
 import { CursorPrecision } from "@/components/ui/cursor-precision";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { ArrowRight, Crosshair } from "lucide-react";
+import Image from "next/image";
 
 const stats = [
   { value: 0.05, suffix: "mm", label: "Tolerance", prefix: "±" },
@@ -31,9 +32,20 @@ export function HeroV2() {
       ref={containerRef}
       className="relative min-h-screen w-full bg-black overflow-hidden"
     >
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero-bg.png"
+          alt=""
+          fill
+          className="object-cover opacity-50"
+          priority
+        />
+      </div>
+
       {/* Simple grid background */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.02] z-[1]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
