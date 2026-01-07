@@ -22,9 +22,9 @@ const baseUrl = "https://sized.cc";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "SIZED.CC | Precision Metal Cutting & Custom Fabrication",
+  title: "SIZED.CC | Custom Digital Fabrications & Interior Design",
   description:
-    "Custom signage, furniture, branding, and décor — built to exact size. Industrial craftsmanship for high-performance needs.",
+    "Custom digital fabrications and interior design — signage, furniture, branding, and décor built to exact size with industrial precision.",
   keywords: [
     "metal cutting",
     "custom fabrication",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     canonical: baseUrl,
   },
   openGraph: {
-    title: "SIZED.CC | Precision Metal Cutting & Custom Fabrication",
+    title: "SIZED.CC | Custom Digital Fabrications & Interior Design",
     description:
-      "Custom signage, furniture, branding, and décor — built to exact size. Industrial craftsmanship for high-performance needs.",
+      "Custom digital fabrications and interior design — signage, furniture, branding, and décor built to exact size with industrial precision.",
     url: baseUrl,
     siteName: "SIZED.CC",
     images: [
@@ -60,9 +60,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SIZED.CC | Precision Metal Cutting & Custom Fabrication",
+    title: "SIZED.CC | Custom Digital Fabrications & Interior Design",
     description:
-      "Custom signage, furniture, branding, and décor — built to exact size.",
+      "Custom digital fabrications and interior design — built to exact size.",
     site: "@sizedcc",
     images: ["/og-image.png"],
   },
@@ -119,7 +119,7 @@ const jsonLd = {
       url: baseUrl,
       name: "SIZED.CC",
       description:
-        "Precision Metal Cutting & Custom Fabrication for signage, furniture, branding, and décor.",
+        "Custom Digital Fabrications & Interior Design for signage, furniture, branding, and décor.",
       publisher: {
         "@id": `${baseUrl}/#organization`,
       },
@@ -138,7 +138,7 @@ const jsonLd = {
       name: "SIZED.CC",
       image: `${baseUrl}/og-image.png`,
       description:
-        "Precision Metal Cutting & Custom Fabrication for signage, furniture, branding, and décor.",
+        "Custom Digital Fabrications & Interior Design for signage, furniture, branding, and décor.",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Industrial District, Sector 7",

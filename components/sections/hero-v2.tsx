@@ -8,6 +8,7 @@ import { ProcessStepper } from "@/components/ui/process-stepper";
 import { CursorPrecision } from "@/components/ui/cursor-precision";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { ArrowRight, Crosshair } from "lucide-react";
+import Image from "next/image";
 
 const stats = [
   { value: 0.05, suffix: "mm", label: "Tolerance", prefix: "±" },
@@ -16,7 +17,7 @@ const stats = [
 ];
 
 export function HeroV2() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef < HTMLDivElement > (null);
   const { openModal } = useQuoteModal();
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -31,9 +32,20 @@ export function HeroV2() {
       ref={containerRef}
       className="relative min-h-screen w-full bg-black overflow-hidden"
     >
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero-bg.png"
+          alt=""
+          fill
+          className="object-cover opacity-50"
+          priority
+        />
+      </div>
+
       {/* Simple grid background */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.02] z-[1]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
@@ -60,9 +72,9 @@ export function HeroV2() {
       {/* Main content */}
       <motion.div
         style={{ opacity, y }}
-        className="relative z-10 container mx-auto px-4 pt-28 pb-16 min-h-screen flex items-center"
+        className="relative z-10 container mx-auto px-4 pt-16 lg:pt-20 xl:pt-28 pb-8 lg:pb-10 xl:pb-16 min-h-screen flex items-center justify-center lg:justify-start"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 w-full items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-16 w-full items-center">
           {/* LEFT SIDE */}
           <div className="space-y-8">
             {/* Badge */}
@@ -88,11 +100,11 @@ export function HeroV2() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold tracking-tight leading-[1.1]">
-                <span className="text-white">Metal Cutting &</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-heading font-bold tracking-tight leading-[1.1]">
+                <span className="text-white">Custom digital Fabrication</span>
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
-                  Custom Fabrication
+                  & Interior Design
                 </span>
               </h1>
             </motion.div>
@@ -185,7 +197,7 @@ export function HeroV2() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative h-[480px] lg:h-[520px] scroll-mt-24"
+            className="relative h-[480px] lg:h-[460px] xl:h-[520px] scroll-mt-24"
           >
             {/* Simple frame */}
             <div className="absolute -inset-4 rounded-3xl border border-white/5 pointer-events-none" />
