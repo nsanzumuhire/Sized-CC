@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
@@ -26,6 +26,22 @@ export function HeroV2() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 50]);
+
+  const [activeMachine, setActiveMachine] = useState(0);
+  const machines = [
+    "5-Axis CNC",
+    "Laser & Plasma Cutting",
+    "Large Format & UV Printing",
+    "3D Prototyping",
+    "Chrome Spraying Systems"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveMachine((prev) => (prev + 1) % machines.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
@@ -109,7 +125,6 @@ export function HeroV2() {
               </h1>
             </motion.div>
 
-            {/* Subheadline */}
             {/* Description & Tech Stack */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -118,27 +133,31 @@ export function HeroV2() {
               className="space-y-6 max-w-xl"
             >
               <p className="text-base md:text-lg text-neutral-400 leading-relaxed">
-                Industrial-grade fabrication powered by an advanced fleet. We build to exact specifications.
+                Precision fabrication built to your exact specifications.
               </p>
 
               {/* Machinery Tech Pills */}
               <div className="flex flex-wrap gap-2">
-                {[
-                  "5-Axis CNC",
-                  "Laser & Plasma Cutting",
-                  "Large Format & UV Printing",
-                  "3D Prototyping",
-                  "Chrome Spraying Systems"
-                ].map((machine, i) => (
+                {machines.map((machine, i) => (
                   <motion.div
                     key={machine}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 + (i * 0.1) }}
-                    className="group relative px-3 py-1.5 rounded-full bg-white/5 border border-white/10 overflow-hidden hover:border-primary/50 transition-colors cursor-default"
+                    onMouseEnter={() => setActiveMachine(i)}
+                    className={`group relative px-3 py-1.5 rounded-full bg-white/5 border overflow-hidden transition-all duration-300 cursor-default ${i === activeMachine
+                      ? "border-primary/50 shadow-[0_0_15px_rgba(249,115,22,0.15)]"
+                      : "border-white/10 hover:border-primary/30"
+                      }`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <span className="relative text-[11px] md:text-xs font-mono font-medium text-white/80 group-hover:text-white uppercase tracking-wider">
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent transition-opacity duration-500 ${i === activeMachine ? "opacity-100" : "opacity-0"
+                        }`}
+                    />
+                    <span
+                      className={`relative text-[11px] md:text-xs font-mono font-medium uppercase tracking-wider transition-colors duration-300 ${i === activeMachine ? "text-white" : "text-white/60 group-hover:text-white/80"
+                        }`}
+                    >
                       {machine}
                     </span>
                   </motion.div>
@@ -258,6 +277,6 @@ export function HeroV2() {
           <div className="w-1 h-1.5 rounded-full bg-white/40" />
         </motion.div>
       </motion.div>
-    </section>
+    </section >
   );
 }
