@@ -35,10 +35,10 @@ export function HeroV2() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-bg.png"
-          alt=""
+          src="/images/IMG_8113.JPG"
+          alt="Night cityscape background"
           fill
-          className="object-cover opacity-50"
+          className="object-cover opacity-60"
           priority
         />
       </div>
