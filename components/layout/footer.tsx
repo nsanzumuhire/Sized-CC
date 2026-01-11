@@ -68,8 +68,8 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>info@sized.cc</li>
-              <li>+250 783 801 575</li>
+              <li>sizedrwanda@gmail.com</li>
+              <li>+250 795 555 575</li>
               <li>120 KG 19 Ave, Kigali</li>
             </ul>
           </div>
