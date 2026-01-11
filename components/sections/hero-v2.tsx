@@ -29,7 +29,8 @@ export function HeroV2() {
 
   const [activeMachine, setActiveMachine] = useState(0);
   const machines = [
-    "5-Axis CNC",
+    "5-Axis CNC Router",
+    "Plotter stickers",
     "Laser & Plasma Cutting",
     "Large Format & UV Printing",
     "3D Prototyping",
@@ -132,7 +133,7 @@ export function HeroV2() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="space-y-6 max-w-xl"
             >
-              <p className="text-base md:text-lg text-neutral-400 leading-relaxed">
+              <p className="text-sm md:text-base text-neutral-400 leading-relaxed font-light max-w-lg">
                 Precision fabrication built to your exact specifications.
               </p>
 
@@ -155,7 +156,7 @@ export function HeroV2() {
                         }`}
                     />
                     <span
-                      className={`relative text-[11px] md:text-xs font-mono font-medium uppercase tracking-wider transition-colors duration-300 ${i === activeMachine ? "text-white" : "text-white/60 group-hover:text-white/80"
+                      className={`relative text-[10px] md:text-[11px] font-mono font-medium uppercase tracking-wider transition-colors duration-300 ${i === activeMachine ? "text-white" : "text-white/60 group-hover:text-white/80"
                         }`}
                     >
                       {machine}

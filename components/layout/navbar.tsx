@@ -117,7 +117,7 @@ export function Navbar() {
                       Over 10 years of excellence in custom craftsmanship.
                     </ListItem>
                     <ListItem href="#about" title="Our Values">
-                      Innovation, Quality, and Dedication to detail.
+                      Innovation, Quality, Precision and Dedication to detail.
                     </ListItem>
                     <ListItem href="#about" title="The Team">
                       Meet the experts behind our success.
