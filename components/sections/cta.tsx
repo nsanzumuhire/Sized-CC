@@ -38,7 +38,7 @@ export function CTA() {
           </p>
           <Button
             size="lg"
-            onClick={openModal}
+            onClick={() => openModal()}
             className="bg-primary hover:bg-primary/90 text-white text-lg font-semibold h-14 px-10 rounded-full shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_50px_rgba(249,115,22,0.5)] transition-all duration-300 hover:scale-105 group"
           >
             Request a Quote
