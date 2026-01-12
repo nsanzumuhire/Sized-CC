@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 interface MeasureHoverProps {
   children: React.ReactNode;
   color?: "orange" | "violet" | "emerald" | "rose" | "amber" | "cyan" | "primary";
+  isActive?: boolean;
 }
 
 const colorStyles = {
@@ -40,9 +41,11 @@ const colorStyles = {
   },
 };
 
-export const MeasureHover = ({ children, color = "primary" }: MeasureHoverProps) => {
+export const MeasureHover = ({ children, color = "primary", isActive = false }: MeasureHoverProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const styles = colorStyles[color];
+
+  const show = isHovered || isActive;
 
   return (
     <motion.div
@@ -57,7 +60,7 @@ export const MeasureHover = ({ children, color = "primary" }: MeasureHoverProps)
           styles.border
         )}
         initial={{ opacity: 0, scaleX: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0, scaleX: isHovered ? 1 : 0 }}
+        animate={{ opacity: show ? 1 : 0, scaleX: show ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       >
         <div className={cn(
@@ -75,7 +78,7 @@ export const MeasureHover = ({ children, color = "primary" }: MeasureHoverProps)
           styles.border
         )}
         initial={{ opacity: 0, scaleY: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0, scaleY: isHovered ? 1 : 0 }}
+        animate={{ opacity: show ? 1 : 0, scaleY: show ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       >
         <div className={cn(

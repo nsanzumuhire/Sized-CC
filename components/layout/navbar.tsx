@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { cn } from "@/lib/utils";
+import { trackQuoteClick, trackContactClick } from "@/lib/analytics";
 import React from "react";
 
 const ListItem = React.forwardRef <
@@ -287,10 +288,18 @@ export function Navbar() {
                         </a>
                       </NavigationMenuLink>
                     </li>
-                    <ListItem href="mailto:sizedrwanda@gmail.com" title="Email Us">
+                    <ListItem
+                      href="mailto:sizedrwanda@gmail.com"
+                      title="Email Us"
+                      onClick={() => trackContactClick({ method: 'email', location: 'navbar' })}
+                    >
                       sizedrwanda@gmail.com
                     </ListItem>
-                    <ListItem href="tel:+250795555575" title="Call Us">
+                    <ListItem
+                      href="tel:+250795555575"
+                      title="Call Us"
+                      onClick={() => trackContactClick({ method: 'phone', location: 'navbar' })}
+                    >
                       +250 795 555 575
                     </ListItem>
                     <ListItem href="https://maps.google.com/?q=120+KG+19+Ave+Kigali" title="Visit Us">
@@ -316,7 +325,10 @@ export function Navbar() {
             Log in
           </Button>
           <Button
-            onClick={openModal}
+            onClick={() => {
+              trackQuoteClick({ location: 'navbar' });
+              openModal('navbar-button');
+            }}
             className="bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white hover:opacity-90 rounded-full text-sm font-semibold px-6 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all duration-300"
           >
             Get Quote
@@ -378,7 +390,11 @@ export function Navbar() {
                 transition={{ delay: 0.5, duration: 0.3 }}
               >
                 <Button
-                  onClick={() => { setIsOpen(false); openModal(); }}
+                  onClick={() => {
+                    setIsOpen(false);
+                    trackQuoteClick({ location: 'navbar-mobile' });
+                    openModal('navbar-mobile-button');
+                  }}
                   className="w-full bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white rounded-full py-6 text-lg font-bold mt-4 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all duration-300"
                 >
                   Request Quote

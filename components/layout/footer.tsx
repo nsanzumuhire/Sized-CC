@@ -19,6 +19,7 @@ import {
   MtnMoMo,
   AirtelMoney
 } from "@/components/custom-icons";
+import { trackContactClick } from "@/lib/analytics";
 
 const services = [
   { name: "Signage", icon: HangingSign, href: "#services" },
@@ -137,13 +138,25 @@ export function Footer() {
                 <div className="p-1.5 rounded bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
                   <Mail className="w-3.5 h-3.5" />
                 </div>
-                <a href="mailto:sizedrwanda@gmail.com" className="hover:text-white transition-colors">sizedrwanda@gmail.com</a>
+                <a
+                  href="mailto:sizedrwanda@gmail.com"
+                  className="hover:text-white transition-colors"
+                  onClick={() => trackContactClick({ method: 'email', location: 'footer' })}
+                >
+                  sizedrwanda@gmail.com
+                </a>
               </li>
               <li className="flex items-center gap-2 group">
                 <div className="p-1.5 rounded bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
                   <Phone className="w-3.5 h-3.5" />
                 </div>
-                <a href="tel:+250795555575" className="hover:text-white transition-colors">+250 795 555 575</a>
+                <a
+                  href="tel:+250795555575"
+                  className="hover:text-white transition-colors"
+                  onClick={() => trackContactClick({ method: 'phone', location: 'footer' })}
+                >
+                  +250 795 555 575
+                </a>
               </li>
               <li className="flex items-start gap-2 group">
                 <div className="p-1.5 rounded bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">

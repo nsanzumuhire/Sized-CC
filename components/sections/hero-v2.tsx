@@ -9,6 +9,7 @@ import { CursorPrecision } from "@/components/ui/cursor-precision";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { ArrowRight, Crosshair } from "lucide-react";
 import Image from "next/image";
+import { trackQuoteClick } from "@/lib/analytics";
 
 const stats = [
   { value: 0.05, suffix: "mm", label: "Tolerance", prefix: "±" },
@@ -175,7 +176,10 @@ export function HeroV2() {
             >
               <Button
                 size="lg"
-                onClick={openModal}
+                onClick={() => {
+                  trackQuoteClick({ location: 'hero' });
+                  openModal('hero-button');
+                }}
                 className="h-12 px-6 bg-primary hover:bg-primary/90 text-white font-semibold text-sm rounded-lg shadow-[0_0_30px_rgba(249,115,22,0.25)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] transition-all duration-300 group"
               >
                 <Crosshair className="w-4 h-4 mr-2" />
