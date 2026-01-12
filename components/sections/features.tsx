@@ -28,13 +28,13 @@ export function Features() {
               Why Choose <span className="text-primary">SIZED</span>?
             </h2>
             <p className="text-lg text-neutral-400 leading-relaxed mb-10">
-              We don&apos;t just cut metal; we engineer solutions with precision and durability that lasts.
+              We listen, design, fabricate, and deliver—without compromises.
             </p>
-            
+
             <div className="space-y-4">
               {features.map((feature, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className="flex gap-4 p-5 rounded-xl border border-white/5 hover:border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -57,24 +57,24 @@ export function Features() {
           <div className="relative h-[450px] w-full rounded-2xl overflow-hidden">
             {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
-            
+
             {/* Animated rings */}
-            <motion.div 
+            <motion.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-white/5 rounded-full"
               animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div 
+            <motion.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 border border-white/10 rounded-full"
               animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.7, 0.4] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div 
+            <motion.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-primary/20 rounded-full"
               animate={{ scale: [1, 1.15, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
-            
+
             {/* Center content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className="text-[120px] md:text-[150px] font-bold text-white/[0.03] font-heading select-none leading-none">

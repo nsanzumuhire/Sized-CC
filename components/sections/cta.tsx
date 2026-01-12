@@ -10,7 +10,7 @@ export function CTA() {
   const { openModal } = useQuoteModal();
 
   return (
-    <section className="py-32 relative overflow-hidden bg-black border-t border-white/5 flex items-center justify-center min-h-[500px]">
+    <section className="pt-32 pb-8 relative overflow-hidden bg-black border-t border-white/5 flex items-center justify-center min-h-[500px]">
       <BackgroundBeams className="opacity-20" />
 
       <div className="container relative z-10 mx-auto px-4 text-center">
