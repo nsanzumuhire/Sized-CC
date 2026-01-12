@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -77,9 +78,15 @@ export function Navbar() {
         >
           <Link
             href="/"
-            className="text-2xl font-bold font-heading tracking-tighter text-black dark:text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="flex items-center gap-1 hover:opacity-80 transition-opacity"
           >
-            SIZED<span className="text-primary">.CC</span>
+            <Image
+              src="/logo.png"
+              alt="SIZED"
+              width={120}
+              height={40}
+              className="h-8 w-auto object-contain"
+            />
           </Link>
         </motion.div>
 

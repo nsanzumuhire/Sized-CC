@@ -33,6 +33,10 @@ const faqs = [
     answer: "We offer professional installation services for signage, fixtures, and large installations. Our team ensures everything is mounted securely and looks perfect.",
   },
   {
+    question: "What payment methods do you accept?",
+    answer: "We accept Visa, Mastercard, MTN Mobile Money, and Airtel Money. Payment can be made securely upon invoice generation.",
+  },
+  {
     question: "What file formats do you accept?",
     answer: "We accept DXF, DWG, AI, EPS, PDF, and STEP files. If you only have a sketch or concept, our design team can create production-ready files for you.",
   },

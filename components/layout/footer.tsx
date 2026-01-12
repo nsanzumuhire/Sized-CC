@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Sofa,
   Palette,
@@ -45,9 +46,15 @@ export function Footer() {
           {/* Brand Column */}
           <div className="space-y-4">
             <div className="space-y-3">
-              <h3 className="text-xl font-bold font-heading text-white">
-                SIZED<span className="text-primary">.CC</span>
-              </h3>
+              <Link href="/" className="block w-fit">
+                <Image
+                  src="/logo.png"
+                  alt="SIZED"
+                  width={120}
+                  height={40}
+                  className="h-8 w-auto object-contain"
+                />
+              </Link>
               <p className="text-muted-foreground text-xs leading-relaxed">
                 Precision metal cutting and custom fabrication for industrial and
                 commercial applications.
