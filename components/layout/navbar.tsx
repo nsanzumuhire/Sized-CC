@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -310,7 +309,6 @@ export function Navbar() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="hidden md:flex items-center gap-3"
         >
-          <ThemeToggle />
           <Button
             variant="ghost"
             className="text-black dark:text-white hover:text-primary hover:bg-black/5 dark:hover:bg-white/5 rounded-full text-sm font-medium"
@@ -327,7 +325,6 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
