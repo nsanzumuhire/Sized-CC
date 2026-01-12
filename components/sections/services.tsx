@@ -1,20 +1,21 @@
 "use client";
 
 import {
-  Hammer,
   Sofa,
   Palette,
   Gift,
   Printer,
-  PenTool,
+  House,
 } from "lucide-react";
 import { MeasureHover } from "@/components/ui/measure-hover";
+import { motion } from "framer-motion";
+import { HangingSign } from "@/components/custom-icons";
 
 const services = [
   {
     title: "Signage",
     description: "2D & 3D signage, embossed & reflective signs.",
-    icon: Hammer,
+    icon: HangingSign,
     hoverColor: "from-orange-500/20 to-orange-500/5",
     iconHover: "group-hover:text-orange-500 group-hover:bg-orange-500/20",
     measureColor: "orange" as const,
@@ -38,7 +39,7 @@ const services = [
   {
     title: "Home Décor",
     description: "Exclusive wall décor and custom art pieces.",
-    icon: PenTool,
+    icon: House,
     hoverColor: "from-rose-500/20 to-rose-500/5",
     iconHover: "group-hover:text-rose-500 group-hover:bg-rose-500/20",
     measureColor: "rose" as const,
@@ -70,14 +71,26 @@ export function Services() {
       <div className="container mx-auto px-4">
         {/* Centered Modern Title */}
         <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6"
+          >
             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest">
               What We Do
             </span>
-          </div>
-          
-          <h2 className="text-4xl md:text-6xl font-bold font-heading text-white tracking-tight mb-6">
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-bold font-heading text-white tracking-tight mb-6"
+          >
             Our{" "}
             <span className="relative inline-block">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-300 to-neutral-500">
@@ -85,36 +98,51 @@ export function Services() {
               </span>
               <span className="absolute -bottom-2 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
             </span>
-          </h2>
-          
-          <p className="text-neutral-400 max-w-lg mx-auto text-lg">
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-neutral-400 max-w-lg mx-auto text-lg"
+          >
             High-performance fabrication designed for scalability and precision.
-          </p>
+          </motion.p>
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, idx) => (
-            <MeasureHover key={idx} color={service.measureColor}>
-              <div className="group h-full p-8 bg-neutral-900/20 border border-white/5 hover:border-white/10 transition-all duration-500 rounded-xl relative overflow-hidden">
-                {/* Hover gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
-                <div className="relative z-10">
-                  <div className={`p-3 bg-white/5 w-fit rounded-lg mb-6 transition-colors duration-300 ${service.iconHover}`}>
-                    <service.icon className="w-6 h-6 text-white transition-colors duration-300" />
-                  </div>
-                  <h4 className="text-white font-bold tracking-tight mt-4 text-xl font-heading">
-                    {service.title}
-                  </h4>
-                  <p className="mt-4 text-neutral-400 tracking-wide leading-relaxed text-sm">
-                    {service.description}
-                  </p>
-                </div>
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+            >
+              <MeasureHover color={service.measureColor}>
+                <div className="group h-full p-8 bg-neutral-900/20 border border-white/5 hover:border-white/10 transition-all duration-500 rounded-xl relative overflow-hidden">
+                  {/* Hover gradient overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.hoverColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:20px_20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              </div>
-            </MeasureHover>
+                  <div className="relative z-10">
+                    <div className={`p-3 bg-white/5 w-fit rounded-lg mb-6 transition-colors duration-300 ${service.iconHover}`}>
+                      <service.icon className="w-6 h-6 text-white transition-colors duration-300" />
+                    </div>
+                    <h4 className="text-white font-bold tracking-tight mt-4 text-xl font-heading">
+                      {service.title}
+                    </h4>
+                    <p className="mt-4 text-neutral-400 tracking-wide leading-relaxed text-sm">
+                      {service.description}
+                    </p>
+                  </div>
+
+                  {/* Tech Corner Accents */}
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:20px_20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                </div>
+              </MeasureHover>
+            </motion.div>
           ))}
         </div>
       </div>
