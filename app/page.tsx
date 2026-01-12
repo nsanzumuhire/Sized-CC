@@ -90,8 +90,8 @@ export default function Home() {
       <main>
         {/* Above-fold content - loaded immediately */}
         <HeroV2 />
-        <Materials />
         <Services />
+        <Materials />
 
         {/* Below-fold content - dynamically loaded */}
         <TechnicalSpecs />
