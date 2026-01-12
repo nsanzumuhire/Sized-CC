@@ -85,7 +85,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="#portfolio" className="hover:text-primary transition-colors">
                   Portfolio
                 </a>
               </li>
@@ -148,7 +148,7 @@ export function Footer() {
         {/* Bottom Bar - Centered Copyright */}
         <div className="border-t border-white/10 pt-8 flex justify-center items-center">
           <p className="text-[10px] text-muted-foreground text-center">
-            © {new Date().getFullYear()} SIZED.CC. All rights reserved.
+            © {new Date().getFullYear()} SIZED. All rights reserved.
           </p>
         </div>
       </div>
