@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, User, Phone, Briefcase, MessageSquare } from "lucide-react";
+import { X, User, Phone, Briefcase, MessageSquare } from "lucide-react";
+import { WhatsApp } from "@/components/custom-icons";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +25,7 @@ const services = [
   { value: "other", label: "Other" },
 ];
 
-const WHATSAPP_NUMBER = "250784226895";
+const WHATSAPP_NUMBER = "250795555575";
 
 export function QuoteModal() {
   const { isOpen, closeModal } = useQuoteModal();
@@ -58,7 +59,7 @@ export function QuoteModal() {
 *Service:* ${selectedService}
 *Message:* ${formData.message || "No additional details"}`;
 
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
 
     // Track quote submission
     trackQuoteSubmit({ service: formData.service });
@@ -233,10 +234,10 @@ export function QuoteModal() {
                 {/* Submit */}
                 <Button
                   type="submit"
-                  className="w-full h-12 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all group"
+                  className="w-full h-12 bg-[#25D366] hover:bg-[#22c55e] text-white font-semibold rounded-xl shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.4)] transition-all group"
                 >
-                  Send
-                  <Send className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <WhatsApp className="w-5 h-5 mr-2" />
+                  Send via WhatsApp
                 </Button>
               </form>
             </div>
