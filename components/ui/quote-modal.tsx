@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Send, User, Phone, Briefcase, MessageSquare } from "lucide-react";
+import { X, User, Phone, Briefcase, MessageSquare } from "lucide-react";
+import { WhatsApp } from "@/components/custom-icons";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { trackQuoteSubmit, trackContactClick } from "@/lib/analytics";
 
 const services = [
   { value: "signage", label: "Signage" },
@@ -23,7 +25,7 @@ const services = [
   { value: "other", label: "Other" },
 ];
 
-const WHATSAPP_NUMBER = "250784226895";
+const WHATSAPP_NUMBER = "250795555575";
 
 export function QuoteModal() {
   const { isOpen, closeModal } = useQuoteModal();
@@ -33,7 +35,7 @@ export function QuoteModal() {
     service: "",
     message: "",
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState < Record < string, string>> ({});
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -57,7 +59,14 @@ export function QuoteModal() {
 *Service:* ${selectedService}
 *Message:* ${formData.message || "No additional details"}`;
 
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+
+    // Track quote submission
+    trackQuoteSubmit({ service: formData.service });
+
+    // Track WhatsApp contact method
+    trackContactClick({ method: 'whatsapp', location: 'quote-modal' });
+
     window.open(whatsappUrl, "_blank");
 
     // Reset form and close modal
@@ -136,9 +145,8 @@ export function QuoteModal() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
-                      className={`w-full pl-11 pr-4 py-3 bg-black/50 border ${
-                        errors.name ? "border-red-500" : "border-white/10"
-                      } rounded-xl text-white placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
+                      className={`w-full pl-11 pr-4 py-3 bg-black/50 border ${errors.name ? "border-red-500" : "border-white/10"
+                        } rounded-xl text-white placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
                     />
                   </div>
                   {errors.name && (
@@ -159,9 +167,8 @@ export function QuoteModal() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+250 7XX XXX XXX"
-                      className={`w-full pl-11 pr-4 py-3 bg-black/50 border ${
-                        errors.phone ? "border-red-500" : "border-white/10"
-                      } rounded-xl text-white placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
+                      className={`w-full pl-11 pr-4 py-3 bg-black/50 border ${errors.phone ? "border-red-500" : "border-white/10"
+                        } rounded-xl text-white placeholder:text-neutral-600 focus:outline-none focus:border-primary/50 transition-colors`}
                     />
                   </div>
                   {errors.phone && (
@@ -177,14 +184,13 @@ export function QuoteModal() {
                   <div className="relative">
                     <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500 z-10 pointer-events-none" />
                     <Select value={formData.service} onValueChange={handleServiceChange}>
-                      <SelectTrigger 
-                        className={`w-full h-12 pl-11 pr-4 bg-black/50 border ${
-                          errors.service ? "border-red-500" : "border-white/10"
-                        } rounded-xl text-white focus:border-primary/50 focus:ring-0 focus:ring-offset-0 [&>span]:text-left`}
+                      <SelectTrigger
+                        className={`w-full h-12 pl-11 pr-4 bg-black/50 border ${errors.service ? "border-red-500" : "border-white/10"
+                          } rounded-xl text-white focus:border-primary/50 focus:ring-0 focus:ring-offset-0 [&>span]:text-left`}
                       >
                         <SelectValue placeholder="Select a service" />
                       </SelectTrigger>
-                      <SelectContent 
+                      <SelectContent
                         className="bg-neutral-900 border border-white/10 rounded-xl shadow-2xl"
                         position="popper"
                         sideOffset={4}
@@ -228,10 +234,10 @@ export function QuoteModal() {
                 {/* Submit */}
                 <Button
                   type="submit"
-                  className="w-full h-12 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all group"
+                  className="w-full h-12 bg-[#25D366] hover:bg-[#22c55e] text-white font-semibold rounded-xl shadow-[0_0_20px_rgba(37,211,102,0.3)] hover:shadow-[0_0_30px_rgba(37,211,102,0.4)] transition-all group"
                 >
-                  Send
-                  <Send className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <WhatsApp className="w-5 h-5 mr-2" />
+                  Send via WhatsApp
                 </Button>
               </form>
             </div>

@@ -27,7 +27,7 @@ export function TechnicalSpecs() {
           >
             {/* Technical grid background */}
             <div className="absolute -left-20 -top-20 w-64 h-64 opacity-20">
-              <div 
+              <div
                 className="w-full h-full"
                 style={{
                   backgroundImage: `
@@ -50,7 +50,7 @@ export function TechnicalSpecs() {
 
               {/* Headline */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-white tracking-tight mb-6">
-                Technical
+                Our Technical
                 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
                   Capabilities
@@ -58,8 +58,8 @@ export function TechnicalSpecs() {
               </h2>
 
               {/* Description */}
-              <p className="text-neutral-400 text-lg leading-relaxed mb-8 max-w-md">
-                State-of-the-art machinery meeting aerospace and medical industry standards. Precision engineering at scale.
+              <p className="text-neutral-400 text-lg leading-relaxed mb-8 max-w-xl">
+                SIZED provides comprehensive technical solutions, covering electrical works, painting, interior finishing, and custom fabrication. We manage and execute all assigned works in-house, utilizing our advanced digital fabrication machines to ensure precision, quality, and timely delivery.
               </p>
 
               {/* Tech stats row */}
@@ -81,8 +81,8 @@ export function TechnicalSpecs() {
               </div>
 
               {/* CTA Link */}
-              <a 
-                href="#services" 
+              <a
+                href="#services"
                 className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-orange-400 transition-colors group"
               >
                 Explore our services
@@ -110,7 +110,7 @@ export function TechnicalSpecs() {
                   <div className="relative p-5 rounded-xl bg-neutral-900/80 border border-white/5 hover:border-primary/30 transition-all duration-300 overflow-hidden">
                     {/* Hover gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
+
                     {/* Content */}
                     <div className="relative">
                       {/* Icon & Title Row */}

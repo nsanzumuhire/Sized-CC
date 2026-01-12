@@ -10,7 +10,7 @@ export function CTA() {
   const { openModal } = useQuoteModal();
 
   return (
-    <section className="py-32 relative overflow-hidden bg-black border-t border-white/5 flex items-center justify-center min-h-[500px]">
+    <section className="pt-32 pb-8 relative overflow-hidden bg-black border-t border-white/5 flex items-center justify-center min-h-[500px]">
       <BackgroundBeams className="opacity-20" />
 
       <div className="container relative z-10 mx-auto px-4 text-center">
@@ -38,7 +38,7 @@ export function CTA() {
           </p>
           <Button
             size="lg"
-            onClick={openModal}
+            onClick={() => openModal()}
             className="bg-primary hover:bg-primary/90 text-white text-lg font-semibold h-14 px-10 rounded-full shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_50px_rgba(249,115,22,0.5)] transition-all duration-300 hover:scale-105 group"
           >
             Request a Quote

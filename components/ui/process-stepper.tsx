@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Lightbulb, 
-  PenTool, 
-  CheckCircle, 
-  Truck, 
+import {
+  Lightbulb,
+  PenTool,
+  CheckCircle,
+  Truck,
   Sparkles,
   ArrowRight,
   Clock,
@@ -71,7 +71,7 @@ export function ProcessStepper() {
   // Auto-play through steps
   useEffect(() => {
     if (!isAutoPlaying) return;
-    
+
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
     }, 4000);
@@ -109,7 +109,7 @@ export function ProcessStepper() {
   return (
     <div className="relative h-full flex flex-col">
       {/* Floating glow effect */}
-      <motion.div 
+      <motion.div
         className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full opacity-30 blur-3xl pointer-events-none"
         animate={{
           background: `radial-gradient(circle, ${steps[activeStep].glowColor} 0%, transparent 70%)`,
@@ -128,7 +128,7 @@ export function ProcessStepper() {
             transition={{ duration: 0.5 }}
           />
         </div>
-        
+
         {/* Auto-play toggle */}
         <button
           onClick={toggleAutoPlay}
@@ -152,28 +152,26 @@ export function ProcessStepper() {
             className="relative group"
           >
             <motion.div
-              className={`w-11 h-11 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-                i === activeStep
+              className={`w-11 h-11 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${i === activeStep
                   ? "border-primary bg-primary/20 shadow-[0_0_20px_rgba(249,115,22,0.3)]"
                   : i < activeStep
-                  ? "border-primary/50 bg-primary/10"
-                  : "border-white/10 bg-white/5 hover:border-white/20"
-              }`}
+                    ? "border-primary/50 bg-primary/10"
+                    : "border-white/10 bg-white/5 hover:border-white/20"
+                }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <step.icon 
-                className={`w-4 h-4 transition-colors ${
-                  i <= activeStep ? "text-primary" : "text-white/30"
-                }`} 
+              <step.icon
+                className={`w-4 h-4 transition-colors ${i <= activeStep ? "text-primary" : "text-white/30"
+                  }`}
               />
             </motion.div>
-            
+
             {/* Step label on hover */}
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
               <span className="text-[10px] font-mono text-neutral-500">{step.num}</span>
             </div>
-            
+
             {/* Connector line */}
             {i < steps.length - 1 && (
               <div className="absolute top-1/2 left-full w-[calc(100%-2.75rem)] h-[2px] -translate-y-1/2 hidden sm:block">
@@ -211,7 +209,7 @@ export function ProcessStepper() {
               <div className="flex items-start justify-between mb-5">
                 <div className="flex items-center gap-3">
                   {/* Step icon */}
-                  <motion.div 
+                  <motion.div
                     className={`p-3.5 rounded-xl bg-gradient-to-br ${steps[activeStep].color} shadow-lg`}
                     initial={{ rotate: -10, scale: 0.8 }}
                     animate={{ rotate: 0, scale: 1 }}
@@ -264,7 +262,7 @@ export function ProcessStepper() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  onClick={openModal}
+                  onClick={() => openModal()}
                   className="px-6 py-3 bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white rounded-full font-semibold text-sm hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all group"
                 >
                   Start Your Project
@@ -300,11 +298,10 @@ export function ProcessStepper() {
           <button
             key={i}
             onClick={() => handleStepClick(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === activeStep
+            className={`h-2 rounded-full transition-all duration-300 ${i === activeStep
                 ? "w-8 bg-gradient-to-r from-primary to-orange-400"
                 : "w-2 bg-white/20 hover:bg-white/40"
-            }`}
+              }`}
           />
         ))}
       </div>

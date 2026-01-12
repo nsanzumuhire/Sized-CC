@@ -1,88 +1,183 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Sofa,
+  Palette,
+  Gift,
+  Printer,
+  House,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
+import {
+  HangingSign,
+  Visa,
+  Mastercard,
+  MtnMoMo,
+  AirtelMoney
+} from "@/components/custom-icons";
+import { trackContactClick } from "@/lib/analytics";
+
+const services = [
+  { name: "Signage", icon: HangingSign, href: "#services" },
+  { name: "Branding", icon: Palette, href: "#services" },
+  { name: "Furniture", icon: Sofa, href: "#services" },
+  { name: "Home Décor", icon: House, href: "#services" },
+  { name: "Gifts", icon: Gift, href: "#services" },
+  { name: "Print", icon: Printer, href: "#services" },
+];
+
+const paymentMethods = [
+  { name: "Visa", icon: Visa, color: "hover:text-[#1A1F71] hover:bg-[#1A1F71]/10" },
+  { name: "Mastercard", icon: Mastercard, color: "hover:text-[#EB001B] hover:bg-[#EB001B]/10" },
+  { name: "MTN MoMo", icon: MtnMoMo, color: "hover:text-[#FFCC00] hover:bg-[#FFCC00]/10" },
+  { name: "Airtel Money", icon: AirtelMoney, color: "hover:text-[#E60000] hover:bg-[#E60000]/10" },
+];
+
 export function Footer() {
   return (
     <footer id="contact" className="bg-background border-t border-white/10 pt-16 pb-8 scroll-mt-20">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-x-8 gap-y-12 mb-12">
+
+          {/* Brand Column */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold font-heading text-white">
-              SIZED<span className="text-primary">.CC</span>
-            </h3>
-            <p className="text-muted-foreground text-sm">
-              Precision metal cutting and custom fabrication for industrial and
-              commercial applications.
-            </p>
+            <div className="space-y-3">
+              <Link href="/" className="block w-fit">
+                <Image
+                  src="/logo.png"
+                  alt="SIZED"
+                  width={120}
+                  height={40}
+                  className="h-8 w-auto object-contain"
+                />
+              </Link>
+              <div className="text-sm font-bold leading-tight">
+                <span className="text-white">Custom digital Fabrication</span>
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
+                  & Interior Design
+                </span>
+              </div>
+            </div>
           </div>
 
+          {/* Services Column - Synchronized */}
           <div>
-            <h4 className="font-bold text-white mb-4">Services</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Signage
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Furniture
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Branding
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Interior
-                </a>
-              </li>
+            <h4 className="font-bold text-white mb-4 text-sm">Services</h4>
+            <ul className="space-y-2">
+              {services.map((service, idx) => (
+                <li key={idx}>
+                  <Link
+                    href={service.href}
+                    className="group flex items-center gap-2 text-xs text-muted-foreground hover:text-white transition-colors"
+                  >
+                    <div className="p-1 rounded bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                      <service.icon className="w-3 h-3" />
+                    </div>
+                    <span>{service.name}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Company Column - Cleaned */}
           <div>
-            <h4 className="font-bold text-white mb-4">Company</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h4 className="font-bold text-white mb-4 text-sm">Company</h4>
+            <ul className="space-y-2 text-xs text-muted-foreground">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
                   Process
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="#portfolio" className="hover:text-primary transition-colors">
                   Portfolio
                 </a>
               </li>
+              {/* Contact link removed as likely redundant */}
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
-                  Contact
+                  Privacy Policy
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
-                  Privacy
+                  Terms of Service
                 </a>
               </li>
             </ul>
           </div>
 
+          {/* Payment Methods - Dedicated Column 4 */}
           <div>
-            <h4 className="font-bold text-white mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>info@sized.cc</li>
-              <li>+250 783 801 575</li>
-              <li>120 KG 19 Ave, Kigali</li>
+            <h4 className="font-bold text-white mb-4 text-sm">We Accept</h4>
+            <div className="flex flex-col gap-2">
+              {paymentMethods.map((method, idx) => (
+                <div
+                  key={idx}
+                  className={`flex items-center gap-2 p-1.5 rounded bg-white/5 border border-white/5 text-neutral-400 transition-all duration-300 group ${method.color}`}
+                >
+                  <method.icon className="w-4 h-4" />
+                  <span className="text-xs font-medium group-hover:text-current transition-colors">{method.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact Column - Dedicated Column 5 with Icons */}
+          <div>
+            <h4 className="font-bold text-white mb-4 text-sm">Contact Us</h4>
+            <ul className="space-y-3 text-xs text-muted-foreground">
+              <li className="flex items-center gap-2 group">
+                <div className="p-1.5 rounded bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                  <Mail className="w-3.5 h-3.5" />
+                </div>
+                <a
+                  href="mailto:sizedrwanda@gmail.com"
+                  className="hover:text-white transition-colors"
+                  onClick={() => trackContactClick({ method: 'email', location: 'footer' })}
+                >
+                  sizedrwanda@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2 group">
+                <div className="p-1.5 rounded bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                  <Phone className="w-3.5 h-3.5" />
+                </div>
+                <a
+                  href="tel:+250795555575"
+                  className="hover:text-white transition-colors"
+                  onClick={() => trackContactClick({ method: 'phone', location: 'footer' })}
+                >
+                  +250 795 555 575
+                </a>
+              </li>
+              <li className="flex items-start gap-2 group">
+                <div className="p-1.5 rounded bg-white/5 group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                  <MapPin className="w-3.5 h-3.5" />
+                </div>
+                <span>120 KG 19 Ave, Kigali<br />Rwanda</span>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} SIZED.CC. All rights reserved.
+        {/* Bottom Bar - Centered Copyright */}
+        <div className="border-t border-white/10 pt-8 flex flex-col justify-center items-center gap-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 hover:text-white/50 transition-colors cursor-default">
+            Sized to inspire
           </p>
-          <div className="flex gap-4">{/* Social icons would go here */}</div>
+          <p className="text-[10px] text-muted-foreground text-center">
+            © {new Date().getFullYear()} SIZED. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
   );
 }
-

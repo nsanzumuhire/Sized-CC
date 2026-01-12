@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -17,34 +17,35 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useQuoteModal } from "@/components/providers/quote-modal-provider";
 import { cn } from "@/lib/utils";
+import { trackQuoteClick, trackContactClick } from "@/lib/analytics";
 import React from "react";
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1.5 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-semibold leading-none text-black dark:text-white group-hover:text-primary transition-colors">
-            {title}
-          </div>
-          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
+const ListItem = React.forwardRef <
+  React.ElementRef < "a" >,
+  React.ComponentPropsWithoutRef< "a" >
+> (({ className, title, children, ...props }, ref) => {
+      return (
+        <li>
+          <NavigationMenuLink asChild>
+            <a
+              ref={ref}
+              className={cn(
+                "block select-none space-y-1.5 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group",
+                className
+              )}
+              {...props}
+            >
+              <div className="text-sm font-semibold leading-none text-black dark:text-white group-hover:text-primary transition-colors">
+                {title}
+              </div>
+              <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground/80 group-hover:text-muted-foreground transition-colors">
+                {children}
+              </p>
+            </a>
+          </NavigationMenuLink>
+        </li>
+      );
+    });
 ListItem.displayName = "ListItem";
 
 export function Navbar() {
@@ -77,14 +78,20 @@ export function Navbar() {
         >
           <Link
             href="/"
-            className="text-2xl font-bold font-heading tracking-tighter text-black dark:text-white flex items-center gap-1 hover:opacity-80 transition-opacity"
+            className="flex items-center gap-1 hover:opacity-80 transition-opacity"
           >
-            SIZED<span className="text-primary">.CC</span>
+            <Image
+              src="/logo.png"
+              alt="SIZED"
+              width={120}
+              height={40}
+              className="h-8 w-auto object-contain"
+            />
           </Link>
         </motion.div>
 
         {/* Desktop Nav */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -92,6 +99,39 @@ export function Navbar() {
         >
           <NavigationMenu>
             <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 data-[state=open]:bg-black/5 dark:data-[state=open]:bg-white/5">
+                  About Us
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
+                    <li className="row-span-3">
+                      <NavigationMenuLink asChild>
+                        <a
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/20 to-primary/5 dark:from-primary/10 dark:to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-primary/20 dark:border-primary/10"
+                          href="#about"
+                        >
+                          <div className="mb-2 mt-4 text-lg font-medium text-black dark:text-white">
+                            Who We Are
+                          </div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Leading fabrication experts in Kigali crafting quality solutions.
+                          </p>
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <ListItem href="#about" title="Our Story">
+                      Over 10 years of excellence in custom craftsmanship.
+                    </ListItem>
+                    <ListItem href="#about" title="Our Values">
+                      Innovation, Quality, Precision and Dedication to detail.
+                    </ListItem>
+                    <ListItem href="#about" title="The Team">
+                      Meet the experts behind our success.
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 data-[state=open]:bg-black/5 dark:data-[state=open]:bg-white/5">
                   Services
@@ -123,7 +163,7 @@ export function Navbar() {
                       Custom furniture & tables, interior design for homes, offices, restaurants.
                     </ListItem>
                     <li className="col-span-1 lg:col-span-2">
-                      <ul className="grid grid-cols-3 gap-2">
+                      <ul className="grid grid-cols-4 gap-2">
                         <NavigationMenuLink asChild>
                           <a
                             href="#services"
@@ -146,6 +186,14 @@ export function Navbar() {
                             className="block select-none rounded-md p-2 text-center leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
                             <div className="text-xs font-medium text-black dark:text-white hover:text-primary transition-colors">Print</div>
+                          </a>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink asChild>
+                          <a
+                            href="#materials"
+                            className="block select-none rounded-md p-2 text-center leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-xs font-medium text-black dark:text-white hover:text-primary transition-colors">Materials</div>
                           </a>
                         </NavigationMenuLink>
                       </ul>
@@ -220,37 +268,61 @@ export function Navbar() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <a
-                    href="#contact"
-                    className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200"
-                    )}
-                  >
-                    Contact
-                  </a>
-                </NavigationMenuLink>
+                <NavigationMenuTrigger className="bg-transparent text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 data-[state=open]:bg-black/5 dark:data-[state=open]:bg-white/5">
+                  Contact
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr] bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-black/10 dark:border-white/10">
+                    <li className="row-span-3">
+                      <NavigationMenuLink asChild>
+                        <a
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-orange-500/20 to-orange-500/5 dark:from-orange-500/10 dark:to-neutral-950 p-6 no-underline outline-none focus:shadow-md border border-orange-500/20 dark:border-orange-500/10"
+                          href="#contact"
+                        >
+                          <div className="mb-2 mt-4 text-lg font-medium text-black dark:text-white">
+                            Get in Touch
+                          </div>
+                          <p className="text-sm leading-tight text-muted-foreground">
+                            Ready to start your project? Let's talk.
+                          </p>
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <ListItem
+                      href="mailto:sizedrwanda@gmail.com"
+                      title="Email Us"
+                      onClick={() => trackContactClick({ method: 'email', location: 'navbar' })}
+                    >
+                      sizedrwanda@gmail.com
+                    </ListItem>
+                    <ListItem
+                      href="tel:+250795555575"
+                      title="Call Us"
+                      onClick={() => trackContactClick({ method: 'phone', location: 'navbar' })}
+                    >
+                      +250 795 555 575
+                    </ListItem>
+                    <ListItem href="https://maps.google.com/?q=120+KG+19+Ave+Kigali" title="Visit Us">
+                      120 KG 19 Ave, Kigali
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="hidden md:flex items-center gap-3"
         >
-          <ThemeToggle />
           <Button
-            variant="ghost"
-            className="text-black dark:text-white hover:text-primary hover:bg-black/5 dark:hover:bg-white/5 rounded-full text-sm font-medium"
-          >
-            Log in
-          </Button>
-          <Button 
-            onClick={openModal}
+            onClick={() => {
+              trackQuoteClick({ location: 'navbar' });
+              openModal('navbar-button');
+            }}
             className="bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white hover:opacity-90 rounded-full text-sm font-semibold px-6 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all duration-300"
           >
             Get Quote
@@ -259,7 +331,6 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -288,6 +359,7 @@ export function Navbar() {
           >
             <div className="flex flex-col p-6 gap-4">
               {[
+                { href: "#about", label: "About Us" },
                 { href: "#services", label: "Services" },
                 { href: "#our-process", label: "Process" },
                 { href: "#portfolio", label: "Portfolio" },
@@ -311,8 +383,12 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.3 }}
               >
-                <Button 
-                  onClick={() => { setIsOpen(false); openModal(); }}
+                <Button
+                  onClick={() => {
+                    setIsOpen(false);
+                    trackQuoteClick({ location: 'navbar-mobile' });
+                    openModal('navbar-mobile-button');
+                  }}
                   className="w-full bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white rounded-full py-6 text-lg font-bold mt-4 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all duration-300"
                 >
                   Request Quote

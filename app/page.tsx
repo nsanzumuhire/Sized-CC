@@ -83,6 +83,19 @@ const CTA = dynamic(
   }
 );
 
+const Socials = dynamic(
+  () => import("@/components/sections/socials").then((mod) => mod.Socials),
+  {
+    loading: () => (
+      <div className="py-20 bg-black animate-pulse">
+        <div className="container mx-auto px-4">
+          <div className="h-40 bg-white/5 rounded-xl" />
+        </div>
+      </div>
+    ),
+  }
+);
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white overflow-x-hidden">
@@ -90,8 +103,8 @@ export default function Home() {
       <main>
         {/* Above-fold content - loaded immediately */}
         <HeroV2 />
-        <Materials />
         <Services />
+        <Materials />
 
         {/* Below-fold content - dynamically loaded */}
         <TechnicalSpecs />
@@ -99,6 +112,7 @@ export default function Home() {
         <Features />
         <FAQ />
         <CTA />
+        <Socials />
       </main>
       <Footer />
     </div>

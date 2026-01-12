@@ -1,19 +1,25 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
+import { trackQuoteModalOpen } from "@/lib/analytics";
 
 interface QuoteModalContextType {
   isOpen: boolean;
-  openModal: () => void;
+  openModal: (trigger?: string, service?: string) => void;
   closeModal: () => void;
 }
 
-const QuoteModalContext = createContext<QuoteModalContextType | undefined>(undefined);
+const QuoteModalContext = createContext < QuoteModalContextType | undefined > (undefined);
 
 export function QuoteModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => setIsOpen(true);
+  const openModal = (trigger?: string, service?: string) => {
+    setIsOpen(true);
+    // Track modal opening with context
+    trackQuoteModalOpen({ trigger, service });
+  };
+
   const closeModal = () => setIsOpen(false);
 
   return (
@@ -30,5 +36,4 @@ export function useQuoteModal() {
   }
   return context;
 }
-
 
