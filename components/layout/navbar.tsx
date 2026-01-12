@@ -319,12 +319,6 @@ export function Navbar() {
           className="hidden md:flex items-center gap-3"
         >
           <Button
-            variant="ghost"
-            className="text-black dark:text-white hover:text-primary hover:bg-black/5 dark:hover:bg-white/5 rounded-full text-sm font-medium"
-          >
-            Log in
-          </Button>
-          <Button
             onClick={() => {
               trackQuoteClick({ location: 'navbar' });
               openModal('navbar-button');
