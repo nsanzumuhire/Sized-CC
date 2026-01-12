@@ -55,10 +55,13 @@ export function Footer() {
                   className="h-8 w-auto object-contain"
                 />
               </Link>
-              <p className="text-muted-foreground text-xs leading-relaxed">
-                Precision metal cutting and custom fabrication for industrial and
-                commercial applications.
-              </p>
+              <div className="text-sm font-bold leading-tight">
+                <span className="text-white">Custom digital Fabrication</span>
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
+                  & Interior Design
+                </span>
+              </div>
             </div>
           </div>
 
@@ -153,7 +156,10 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar - Centered Copyright */}
-        <div className="border-t border-white/10 pt-8 flex justify-center items-center">
+        <div className="border-t border-white/10 pt-8 flex flex-col justify-center items-center gap-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 hover:text-white/50 transition-colors cursor-default">
+            Sized to inspire
+          </p>
           <p className="text-[10px] text-muted-foreground text-center">
             © {new Date().getFullYear()} SIZED. All rights reserved.
           </p>
