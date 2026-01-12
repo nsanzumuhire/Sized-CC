@@ -7,7 +7,14 @@ import { Plus, Minus } from "lucide-react";
 const faqs = [
   {
     question: "What materials do you work with?",
-    answer: "We specialize in stainless steel (304, 316), aluminum, carbon steel, brass, copper, titanium, and various plastics like acrylic and polycarbonate. We can source specialty materials upon request.",
+    answer: (
+      <span>
+        We work with a wide range of materials including Wood & Boards (Plywood, MDF, Oak), Plastics & Composites (Acrylic, Polycarbonate), Metals (Aluminum, Steel, Brass), Stone & Mineral (Marble, Granite), Glass (Tempered, Frosted), and Soft Materials (Fabric, Foam).{" "}
+        <a href="#materials" className="text-primary hover:underline">
+          View all materials
+        </a>
+      </span>
+    ),
   },
   {
     question: "What is your typical turnaround time?",
@@ -32,7 +39,7 @@ const faqs = [
 ];
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState < number | null > (0);
 
   return (
     <section id="faq" className="py-32 bg-black border-t border-white/5 scroll-mt-20">
@@ -46,14 +53,14 @@ export function FAQ() {
                 Got Questions?
               </span>
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-bold font-heading text-white tracking-tight mb-6">
               Frequently Asked{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-amber-500">
                 Questions
               </span>
             </h2>
-            
+
             <p className="text-neutral-400 text-lg leading-relaxed">
               Everything you need to know about our fabrication process, materials, and services.
             </p>
@@ -79,7 +86,7 @@ export function FAQ() {
                     )}
                   </div>
                 </button>
-                
+
                 <AnimatePresence>
                   {openIndex === index && (
                     <motion.div

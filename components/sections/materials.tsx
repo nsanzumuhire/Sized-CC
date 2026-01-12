@@ -55,7 +55,7 @@ const materialCategories = [
 
 export function Materials() {
   return (
-    <section className="py-12 bg-black border-y border-white/5 relative overflow-hidden">
+    <section id="materials" className="py-12 bg-black border-y border-white/5 relative overflow-hidden">
       {/* Background gradients */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />

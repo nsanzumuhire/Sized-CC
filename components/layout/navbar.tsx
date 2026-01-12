@@ -156,7 +156,7 @@ export function Navbar() {
                       Custom furniture & tables, interior design for homes, offices, restaurants.
                     </ListItem>
                     <li className="col-span-1 lg:col-span-2">
-                      <ul className="grid grid-cols-3 gap-2">
+                      <ul className="grid grid-cols-4 gap-2">
                         <NavigationMenuLink asChild>
                           <a
                             href="#services"
@@ -179,6 +179,14 @@ export function Navbar() {
                             className="block select-none rounded-md p-2 text-center leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           >
                             <div className="text-xs font-medium text-black dark:text-white hover:text-primary transition-colors">Print</div>
+                          </a>
+                        </NavigationMenuLink>
+                        <NavigationMenuLink asChild>
+                          <a
+                            href="#materials"
+                            className="block select-none rounded-md p-2 text-center leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-xs font-medium text-black dark:text-white hover:text-primary transition-colors">Materials</div>
                           </a>
                         </NavigationMenuLink>
                       </ul>
