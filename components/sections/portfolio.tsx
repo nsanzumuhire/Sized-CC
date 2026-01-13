@@ -1,66 +1,83 @@
 "use client";
 
-import Image from "next/image";
-
-const projects = [
-  { 
-    id: 1, 
-    title: "Corporate Signage", 
-    category: "Signage", 
-    gridClass: "md:col-span-2 md:row-span-2",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
-  },
-  { 
-    id: 2, 
-    title: "Steel Table Frame", 
-    category: "Furniture",
-    gridClass: "md:col-span-1 md:row-span-1",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"
-  },
-  { 
-    id: 3, 
-    title: "Office Fitout", 
-    category: "Interior",
-    gridClass: "md:col-span-1 md:row-span-2",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80"
-  },
-  { 
-    id: 4, 
-    title: "Geometric Wall Art", 
-    category: "Décor",
-    gridClass: "md:col-span-1 md:row-span-1",
-    image: "https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=600&q=80"
-  },
-  { 
-    id: 5, 
-    title: "Custom Branding", 
-    category: "Branding",
-    gridClass: "md:col-span-2 md:row-span-1",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
-  },
-  { 
-    id: 6, 
-    title: "Industrial Shelving", 
-    category: "Furniture",
-    gridClass: "md:col-span-1 md:row-span-1",
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80"
-  },
-];
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { MasonryGrid } from "@/components/portfolio/masonry-grid";
+import { PortfolioShimmer } from "@/components/portfolio/portfolio-shimmer";
+import { MediaModal } from "@/components/portfolio/media-modal";
+import { fetchFeaturedItems } from "@/lib/portfolio-data";
+import { PortfolioItem } from "@/types/portfolio";
 
 export function Portfolio() {
+  const [items, setItems] = useState < PortfolioItem[] > ([]);
+  const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [columns, setColumns] = useState(3);
+
+  // Load featured items
+  useEffect(() => {
+    async function loadData() {
+      const data = await fetchFeaturedItems();
+      setItems(data);
+      setLoading(false);
+    }
+    loadData();
+  }, []);
+
+  // Responsive columns
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth < 640) {
+        setColumns(1);
+      } else if (window.innerWidth < 1024) {
+        setColumns(2);
+      } else {
+        setColumns(3);
+      }
+    };
+
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
+
+  const handleItemClick = (item: PortfolioItem, index: number) => {
+    setSelectedIndex(index);
+    setModalOpen(true);
+  };
+
+  const handleNavigate = (index: number) => {
+    setSelectedIndex(index);
+  };
+
   return (
     <section id="portfolio" className="py-32 bg-black border-t border-white/5">
       <div className="container mx-auto px-4">
         {/* Title */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6"
+          >
             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             <span className="text-xs font-medium text-neutral-400 uppercase tracking-widest">
               Featured Work
             </span>
-          </div>
-          
-          <h2 className="text-4xl md:text-6xl font-bold font-heading text-white tracking-tight mb-6">
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-bold font-heading text-white tracking-tight mb-6"
+          >
             Our{" "}
             <span className="relative inline-block">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-300 to-neutral-500">
@@ -68,48 +85,68 @@ export function Portfolio() {
               </span>
               <span className="absolute -bottom-2 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" />
             </span>
-          </h2>
-          
-          <p className="text-neutral-400 max-w-lg mx-auto text-lg">
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-neutral-400 max-w-lg mx-auto text-lg"
+          >
             A showcase of precision craftsmanship and industrial artistry.
-          </p>
+          </motion.p>
         </div>
 
-        {/* Asymmetric Masonry Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 auto-rows-[180px]">
-          {projects.map((project) => (
-            <div
-              key={project.id}
-              className={`group relative overflow-hidden rounded-xl cursor-pointer ${project.gridClass}`}
-            >
-              {/* Image */}
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                sizes="(max-width: 768px) 100vw, 33vw"
-              />
-
-              {/* Dark overlay */}
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
-
-              {/* Content - always visible */}
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="text-primary text-xs font-bold uppercase tracking-wider mb-1 opacity-70 group-hover:opacity-100 transition-opacity">
-                  {project.category}
-                </span>
-                <h3 className="text-xl md:text-2xl font-bold text-white font-heading group-hover:translate-y-0 translate-y-1 transition-transform duration-300">
-                  {project.title}
-                </h3>
-              </div>
-
-              {/* Corner accent on hover */}
-              <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-white/0 group-hover:border-white/30 transition-colors duration-300 rounded-tr-lg" />
+        {/* Masonry Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          {loading ? (
+            <PortfolioShimmer />
+          ) : items.length > 0 ? (
+            <MasonryGrid
+              items={items}
+              columns={columns}
+              onItemClick={handleItemClick}
+            />
+          ) : (
+            <div className="text-center py-10 opacity-60">
+              <p className="text-neutral-500 text-sm">Portfolio coming soon...</p>
             </div>
-          ))}
-        </div>
+          )}
+        </motion.div>
+
+        {/* Discover More CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-center mt-12"
+        >
+          <Link
+            href="/portfolio"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary via-orange-500 to-amber-500 text-white rounded-full font-semibold text-sm hover:shadow-[0_0_30px_rgba(249,115,22,0.4)] transition-all"
+          >
+            Discover More
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </div>
+
+      {/* Media Modal */}
+      <MediaModal
+        item={items[selectedIndex] || null}
+        items={items}
+        currentIndex={selectedIndex}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onNavigate={handleNavigate}
+      />
     </section>
   );
 }

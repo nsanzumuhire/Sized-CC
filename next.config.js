@@ -1,12 +1,35 @@
+const path = require('path');
+const { loadEnvConfig } = require('@next/env');
+
+// Manually load env vars from the current directory to ensure they are picked up
+const loaded = loadEnvConfig(__dirname);
+console.log('Next Config Env Load:', {
+  hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+  hasKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  loadedFiles: loaded.loadedEnvFiles.map(f => f.path),
+  cwd: process.cwd(),
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Fix workspace root detection
+  outputFileTracingRoot: path.join(__dirname),
+  
+  // Force expose env vars to Edge Runtime
+  env: {
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+  },
+
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
+        hostname: "uwqqjcsrailzmahgbker.supabase.co",
       },
     ],
     // Optimize image sizes

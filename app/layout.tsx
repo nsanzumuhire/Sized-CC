@@ -18,11 +18,11 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-const baseUrl = "https://sized.cc";
+const baseUrl = "https://Sized.cc";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "SIZED.CC | Custom Digital Fabrications & Interior Design",
+  title: "Sized | Custom Digital Fabrications & Interior Design",
   description:
     "Custom digital fabrications and interior design — signage, furniture, branding, and décor built to exact size with industrial precision.",
   keywords: [
@@ -37,22 +37,22 @@ export const metadata: Metadata = {
     "laser cutting",
     "CNC machining",
   ],
-  authors: [{ name: "SIZED.CC" }],
+  authors: [{ name: "Sized" }],
   alternates: {
     canonical: baseUrl,
   },
   openGraph: {
-    title: "SIZED.CC | Custom Digital Fabrications & Interior Design",
+    title: "Sized | Custom Digital Fabrications & Interior Design",
     description:
       "Custom digital fabrications and interior design — signage, furniture, branding, and décor built to exact size with industrial precision.",
     url: baseUrl,
-    siteName: "SIZED.CC",
+    siteName: "Sized",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SIZED.CC - Precision Metal Cutting",
+        alt: "Sized - Precision Metal Cutting",
       },
     ],
     locale: "en_US",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SIZED.CC | Custom Digital Fabrications & Interior Design",
+    title: "Sized | Custom Digital Fabrications & Interior Design",
     description:
       "Custom digital fabrications and interior design — built to exact size.",
     site: "@sizedcc",
@@ -78,8 +78,15 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon0.svg", type: "image/svg+xml" },
+      { url: "/icon1.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
   },
   verification: {
     google: "google-site-verification-code",
@@ -93,7 +100,7 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": `${baseUrl}/#organization`,
-      name: "SIZED.CC",
+      name: "Sized",
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
@@ -117,7 +124,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${baseUrl}/#website`,
       url: baseUrl,
-      name: "SIZED.CC",
+      name: "Sized",
       description:
         "Custom Digital Fabrications & Interior Design for signage, furniture, branding, and décor.",
       publisher: {
@@ -135,7 +142,7 @@ const jsonLd = {
     {
       "@type": "LocalBusiness",
       "@id": `${baseUrl}/#localbusiness`,
-      name: "SIZED.CC",
+      name: "Sized",
       image: `${baseUrl}/og-image.png`,
       description:
         "Custom Digital Fabrications & Interior Design for signage, furniture, branding, and décor.",
@@ -210,7 +217,11 @@ export default function RootLayout({
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://uwqqjcsrailzmahgbker.supabase.co" />
+
+        {/* Preload critical above-fold images */}
+        <link rel="preload" href="/logo.png" as="image" />
+        <link rel="preload" href="/images/IMG_8113.JPG" as="image" />
 
         {/* Preconnect for faster resource loading */}
         <link
@@ -225,7 +236,7 @@ export default function RootLayout({
         />
         <link
           rel="preconnect"
-          href="https://images.unsplash.com"
+          href="https://uwqqjcsrailzmahgbker.supabase.co"
           crossOrigin="anonymous"
         />
 

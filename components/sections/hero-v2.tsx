@@ -48,15 +48,24 @@ export function HeroV2() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full bg-black overflow-hidden"
+      className="relative min-h-screen md:min-h-0 xl:min-h-screen w-full bg-black overflow-hidden"
     >
-      {/* Background Image */}
+      {/* Background Image - Responsive: hero2.webp for iPad/tablet (768px-1280px), hero.webp for others */}
       <div className="absolute inset-0 z-0">
+        {/* Default hero image - hidden on iPad/tablet dimensions */}
         <Image
-          src="/images/IMG_8113.JPG"
+          src="/images/hero.webp"
           alt="Night cityscape background"
           fill
-          className="object-cover opacity-60"
+          className="object-cover opacity-60 block md:hidden xl:block"
+          priority
+        />
+        {/* iPad/tablet hero image - only shown on tablet dimensions (768px-1280px) */}
+        <Image
+          src="/images/hero2.webp"
+          alt="Night cityscape background"
+          fill
+          className="object-cover opacity-60 hidden md:block xl:hidden"
           priority
         />
       </div>
@@ -90,7 +99,7 @@ export function HeroV2() {
       {/* Main content */}
       <motion.div
         style={{ opacity, y }}
-        className="relative z-10 container mx-auto px-4 pt-16 lg:pt-20 xl:pt-28 pb-8 lg:pb-10 xl:pb-16 min-h-screen flex items-center justify-center lg:justify-start"
+        className="relative z-10 container mx-auto px-4 pt-16 md:pt-24 lg:pt-20 xl:pt-28 pb-8 lg:pb-10 xl:pb-16 min-h-screen md:min-h-0 xl:min-h-screen flex items-center justify-center lg:justify-start"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 xl:gap-16 w-full items-center">
           {/* LEFT SIDE */}
