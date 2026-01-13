@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { logout } from '../actions'
-import { LayoutDashboard, LogOut } from 'lucide-react'
+import { LayoutDashboard } from 'lucide-react'
+import { LogoutButton } from '@/components/admin/logout-button'
 
 export default function DashboardLayout({
     children,
@@ -35,12 +35,7 @@ export default function DashboardLayout({
                     </Link>
                 </nav>
 
-                <form action={logout}>
-                    <button className="w-full flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-red-500/10 text-neutral-400 hover:text-red-500 transition-colors mt-auto">
-                        <LogOut size={18} />
-                        Sign Out
-                    </button>
-                </form>
+                <LogoutButton />
             </aside>
 
             {/* Main Content */}

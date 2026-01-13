@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import { Plus, Trash2, Search, Filter } from 'lucide-react'
+import { Plus, Video } from 'lucide-react'
 import { UploadPortfolioModal } from '@/components/admin/upload-portfolio-modal'
-import { deletePortfolioItem } from '../actions'
+import { DeleteButton } from '@/components/admin/delete-button'
+import { ToggleFeaturedButton } from '@/components/admin/toggle-featured-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,7 +20,7 @@ export default async function DashboardPage() {
             <div className="flex items-center justify-between mb-8">
                 <h1 className="text-3xl font-bold font-heading">Dashboard</h1>
                 <UploadPortfolioModal>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors cursor-pointer">
                         <Plus className="w-5 h-5" />
                         <span>Upload Portfolio</span>
                     </button>
@@ -34,7 +34,7 @@ export default async function DashboardPage() {
                             {item.media_type === 'video' ? (
                                 <>
                                     <Image
-                                        src={item.thumbnail || item.src} // Fallback to src if thumbnail missing (likely won't display if video url)
+                                        src={item.thumbnail || item.src}
                                         alt={item.title}
                                         fill
                                         className="object-cover opacity-50"
@@ -54,14 +54,8 @@ export default async function DashboardPage() {
 
                             {/* Overlay Actions */}
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                                <form action={deletePortfolioItem.bind(null, item.id)}>
-                                    <button
-                                        type="submit"
-                                        className="p-2 bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white rounded-full transition-colors"
-                                    >
-                                        <Trash2 size={20} />
-                                    </button>
-                                </form>
+                                <ToggleFeaturedButton itemId={item.id} isFeatured={item.featured} />
+                                <DeleteButton itemId={item.id} />
                             </div>
                         </div>
 
@@ -71,7 +65,7 @@ export default async function DashboardPage() {
                                     {item.category}
                                 </span>
                                 {item.featured && (
-                                    <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-full text-white/70">
+                                    <span className="text-[10px] bg-yellow-500/20 text-yellow-500 px-2 py-0.5 rounded-full">
                                         Featured
                                     </span>
                                 )}
@@ -84,12 +78,11 @@ export default async function DashboardPage() {
                 {(!items || items.length === 0) && (
                     <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-2xl">
                         <p className="text-neutral-500 mb-4">No portfolio items found</p>
-                        <Link
-                            href="/admin/dashboard/new"
-                            className="text-primary hover:underline"
-                        >
-                            Create your first item
-                        </Link>
+                        <UploadPortfolioModal>
+                            <button className="text-primary hover:underline cursor-pointer">
+                                Create your first item
+                            </button>
+                        </UploadPortfolioModal>
                     </div>
                 )}
             </div>

@@ -67,7 +67,7 @@ export async function createPortfolioItem(formData: FormData) {
     return { success: true }
 }
 
-export async function deletePortfolioItem(id: string) {
+export async function deletePortfolioItem(id: string, formData?: FormData) {
     const supabase = await createClient()
 
     // Verify auth
@@ -83,4 +83,26 @@ export async function deletePortfolioItem(id: string) {
     revalidatePath('/admin/dashboard')
     revalidatePath('/portfolio')
     revalidatePath('/')
+}
+
+export async function toggleFeatured(id: string, currentFeatured: boolean, formData?: FormData) {
+    const supabase = await createClient()
+
+    // Verify auth
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) throw new Error('Unauthorized')
+
+    const { error } = await supabase
+        .from('portfolio_items')
+        .update({ featured: !currentFeatured })
+        .eq('id', id)
+
+    if (error) {
+        return { error: error.message }
+    }
+
+    revalidatePath('/admin/dashboard')
+    revalidatePath('/portfolio')
+    revalidatePath('/')
+    return { success: true }
 }

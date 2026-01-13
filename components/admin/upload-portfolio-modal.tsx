@@ -34,7 +34,7 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
 
     const [category, setCategory] = useState < string > ('')
     const [progress, setProgress] = useState < string > ('')
-    const [currentUploadIndex, setCurrentUploadIndex] = useState < number > (-1) // Track which file is uploading
+    const [currentUploadIndex, setCurrentUploadIndex] = useState < number > (-1)
 
     const formRef = useRef < HTMLFormElement > (null)
 
@@ -43,19 +43,17 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
             const newFiles = Array.from(e.target.files)
             setFiles(prev => [...prev, ...newFiles])
 
-            // Generate previews
             const newPreviews = newFiles.map(file => URL.createObjectURL(file))
             setPreviews(prev => [...prev, ...newPreviews])
         }
     }
 
     const removeFile = (index: number) => {
-        if (uploading) return // Lock during upload
+        if (uploading) return
 
         const newFiles = [...files]
         const newPreviews = [...previews]
 
-        // Revoke URL to avoid memory leaks
         URL.revokeObjectURL(newPreviews[index])
 
         newFiles.splice(index, 1)
@@ -75,19 +73,23 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
     }
 
     const handleOpenChange = (isOpen: boolean) => {
-        if (uploading) return // Prevent closing while uploading
+        if (uploading) return
         setOpen(isOpen)
         if (!isOpen) {
             setTimeout(resetForm, 300)
         }
     }
 
-    const handleSubmit = async (formData: FormData) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
         if (files.length === 0) return
         if (!category) {
             alert("Please select a category")
             return
         }
+
+        const formData = new FormData(e.currentTarget)
 
         setUploading(true)
         const supabase = createClient()
@@ -96,7 +98,7 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
 
         try {
             for (let i = 0; i < files.length; i++) {
-                setCurrentUploadIndex(i) // Set current index loader
+                setCurrentUploadIndex(i)
                 const file = files[i]
                 setProgress(`Uploading ${i + 1} of ${files.length}...`)
 
@@ -105,11 +107,9 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                 const fileName = `${timestamp}-${Math.random().toString(36).substring(7)}.${fileExt}`
                 const filePath = `${fileName}`
 
-                // Determine Media Type
                 const isVideo = file.type.startsWith('video/')
                 const mediaType = isVideo ? 'video' : 'image'
 
-                // 1. Upload File
                 const { error: uploadError } = await supabase.storage
                     .from('portfolio-media')
                     .upload(filePath, file)
@@ -120,7 +120,6 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                     .from('portfolio-media')
                     .getPublicUrl(filePath)
 
-                // 2. Aspect Ratio (Simplified for batch)
                 let itemAspectRatio = 1.0
                 if (!isVideo) {
                     await new Promise < void> ((resolve) => {
@@ -132,10 +131,9 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                         img.src = previews[i]
                     })
                 } else {
-                    itemAspectRatio = 0.5625 // 16:9 for video defaults
+                    itemAspectRatio = 0.5625
                 }
 
-                // 3. Create Item
                 const newFormData = new FormData()
                 newFormData.append('title', files.length > 1 ? `${baseTitle} ${i + 1}` : baseTitle)
                 newFormData.append('category', category)
@@ -148,8 +146,6 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                 if (result?.error) throw new Error(result.error)
             }
 
-            // Success!
-            // Optional: Wait for a moment to show all checks
             await new Promise(r => setTimeout(r, 500))
 
             setOpen(false)
@@ -173,17 +169,13 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
             </DialogTrigger>
             <DialogContent
                 className="sm:max-w-2xl max-h-[90vh] overflow-y-auto bg-neutral-900 border-white/10"
-                onInteractOutside={(e) => {
-                    // Prevent closing if uploading OR if intended
-                    if (uploading) e.preventDefault()
-                    else e.preventDefault() // User requested "never close on outside click"
-                }}
+                onInteractOutside={(e) => e.preventDefault()}
             >
                 <DialogHeader>
                     <DialogTitle className="text-xl">Upload Portfolio Items</DialogTitle>
                 </DialogHeader>
 
-                <form ref={formRef} action={handleSubmit} className="space-y-6 mt-4">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 mt-4">
                     {/* File Drop Area */}
                     <div className={`
             border-2 border-dashed rounded-xl p-8 text-center transition-colors relative
@@ -212,7 +204,6 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                             </label>
                         ) : (
                             <div className="space-y-4">
-                                {/* Grid of previews */}
                                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-h-[300px] overflow-y-auto p-2">
                                     {files.map((file, idx) => {
                                         const isUploading = uploading && idx === currentUploadIndex
@@ -220,13 +211,11 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
 
                                         return (
                                             <div key={idx} className="relative group aspect-square bg-black rounded-lg overflow-hidden border border-white/10">
-                                                { /* Loader Overlay */}
                                                 {isUploading && (
                                                     <div className="absolute inset-0 bg-black/60 z-20 flex items-center justify-center backdrop-blur-sm">
                                                         <Loader2 className="w-8 h-8 text-primary animate-spin" />
                                                     </div>
                                                 )}
-                                                { /* Done Overlay */}
                                                 {isDone && (
                                                     <div className="absolute inset-0 bg-primary/20 z-20 flex items-center justify-center">
                                                         <div className="bg-primary rounded-full p-1">
@@ -252,7 +241,7 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                                                     <button
                                                         type="button"
                                                         onClick={() => removeFile(idx)}
-                                                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                                                        className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10 cursor-pointer"
                                                     >
                                                         <X size={12} />
                                                     </button>
@@ -292,7 +281,7 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                         <div>
                             <label className="block text-sm font-medium text-neutral-400 mb-2">Category</label>
                             <Select value={category} onValueChange={setCategory} disabled={uploading}>
-                                <SelectTrigger className="w-full bg-black/50 border-white/10 text-white h-[42px] disabled:opacity-50">
+                                <SelectTrigger className="w-full bg-black/50 border-white/10 text-white h-[42px] disabled:opacity-50 cursor-pointer">
                                     <SelectValue placeholder="Select Category" />
                                 </SelectTrigger>
                                 <SelectContent className="bg-neutral-900 border-white/10 text-white">
@@ -312,7 +301,7 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                             name="featured"
                             id="featured-modal"
                             disabled={uploading}
-                            className="w-4 h-4 rounded border-white/20 bg-white/5 text-primary focus:ring-primary accent-primary disabled:opacity-50"
+                            className="w-4 h-4 rounded border-white/20 bg-white/5 text-primary focus:ring-primary accent-primary disabled:opacity-50 cursor-pointer"
                         />
                         <label htmlFor="featured-modal" className="text-sm font-medium text-neutral-300 select-none cursor-pointer">
                             Feature on Homepage
@@ -322,7 +311,7 @@ export function UploadPortfolioModal({ children }: { children: React.ReactNode }
                     <Button
                         type="submit"
                         disabled={uploading}
-                        className="w-full bg-primary hover:bg-primary/90 text-white h-12 text-base disabled:opacity-100" // Keep opacity 100 to show loader nicely
+                        className="w-full bg-primary hover:bg-primary/90 text-white h-12 text-base cursor-pointer disabled:cursor-not-allowed"
                     >
                         {uploading ? (
                             <div className="flex items-center gap-2">
