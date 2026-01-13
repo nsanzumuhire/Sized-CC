@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MasonryGrid } from "@/components/portfolio/masonry-grid";
 import { MediaModal } from "@/components/portfolio/media-modal";
-import { filterPortfolioItems, portfolioItems } from "@/lib/portfolio-data";
+import { PortfolioShimmer } from "@/components/portfolio/portfolio-shimmer";
+import { fetchPortfolioItems } from "@/lib/portfolio-data";
 import {
     PortfolioItem,
     SERVICE_CATEGORIES,
@@ -15,20 +16,45 @@ import {
 import { cn } from "@/lib/utils";
 
 export default function PortfolioPage() {
-    const [categoryFilter, setCategoryFilter] = useState < ServiceCategory | "all" > (
-        "all"
-    );
+    const [categoryFilter, setCategoryFilter] = useState < ServiceCategory | "all" > ("all");
     const [mediaFilter, setMediaFilter] = useState < MediaType | "all" > ("all");
+    const [allItems, setAllItems] = useState < PortfolioItem[] > ([]);
     const [filteredItems, setFilteredItems] = useState < PortfolioItem[] > ([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [columns, setColumns] = useState(3);
+    const [loading, setLoading] = useState(true);
 
-    // Filter items
+    // Fetch all items on mount
     useEffect(() => {
-        const items = filterPortfolioItems(categoryFilter, mediaFilter);
-        setFilteredItems(items);
-    }, [categoryFilter, mediaFilter]);
+        async function loadData() {
+            try {
+                const data = await fetchPortfolioItems();
+                setAllItems(data);
+                setFilteredItems(data);
+            } catch (error) {
+                console.error("Failed to load portfolio items", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        loadData();
+    }, []);
+
+    // Filter items locally when filters change
+    useEffect(() => {
+        let result = allItems;
+
+        if (categoryFilter !== 'all') {
+            result = result.filter(item => item.category === categoryFilter);
+        }
+
+        if (mediaFilter !== 'all') {
+            result = result.filter(item => item.mediaType === mediaFilter);
+        }
+
+        setFilteredItems(result);
+    }, [categoryFilter, mediaFilter, allItems]);
 
     // Responsive columns
     useEffect(() => {
@@ -133,12 +159,18 @@ export default function PortfolioPage() {
 
             {/* Grid */}
             <div className="container mx-auto px-4 py-12">
-                {filteredItems.length > 0 ? (
+                {loading ? (
+                    <PortfolioShimmer />
+                ) : filteredItems.length > 0 ? (
                     <MasonryGrid
                         items={filteredItems}
                         columns={columns}
                         onItemClick={handleItemClick}
                     />
+                ) : allItems.length === 0 ? (
+                    <div className="text-center py-20 opacity-60">
+                        <p className="text-neutral-500">No portfolio items uploaded yet.</p>
+                    </div>
                 ) : (
                     <motion.div
                         initial={{ opacity: 0 }}

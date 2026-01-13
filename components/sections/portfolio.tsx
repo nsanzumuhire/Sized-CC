@@ -5,19 +5,26 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { MasonryGrid } from "@/components/portfolio/masonry-grid";
+import { PortfolioShimmer } from "@/components/portfolio/portfolio-shimmer";
 import { MediaModal } from "@/components/portfolio/media-modal";
-import { getFeaturedItems } from "@/lib/portfolio-data";
+import { fetchFeaturedItems } from "@/lib/portfolio-data";
 import { PortfolioItem } from "@/types/portfolio";
 
 export function Portfolio() {
   const [items, setItems] = useState < PortfolioItem[] > ([]);
+  const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [columns, setColumns] = useState(3);
 
   // Load featured items
   useEffect(() => {
-    setItems(getFeaturedItems());
+    async function loadData() {
+      const data = await fetchFeaturedItems();
+      setItems(data);
+      setLoading(false);
+    }
+    loadData();
   }, []);
 
   // Responsive columns
@@ -98,11 +105,19 @@ export function Portfolio() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <MasonryGrid
-            items={items}
-            columns={columns}
-            onItemClick={handleItemClick}
-          />
+          {loading ? (
+            <PortfolioShimmer />
+          ) : items.length > 0 ? (
+            <MasonryGrid
+              items={items}
+              columns={columns}
+              onItemClick={handleItemClick}
+            />
+          ) : (
+            <div className="text-center py-10 opacity-60">
+              <p className="text-neutral-500 text-sm">Portfolio coming soon...</p>
+            </div>
+          )}
         </motion.div>
 
         {/* Discover More CTA */}
