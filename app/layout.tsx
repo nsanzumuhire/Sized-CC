@@ -217,7 +217,11 @@ export default function RootLayout({
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://uwqqjcsrailzmahgbker.supabase.co" />
+
+        {/* Preload critical above-fold images */}
+        <link rel="preload" href="/logo.png" as="image" />
+        <link rel="preload" href="/images/IMG_8113.JPG" as="image" />
 
         {/* Preconnect for faster resource loading */}
         <link
@@ -232,7 +236,7 @@ export default function RootLayout({
         />
         <link
           rel="preconnect"
-          href="https://images.unsplash.com"
+          href="https://uwqqjcsrailzmahgbker.supabase.co"
           crossOrigin="anonymous"
         />
 

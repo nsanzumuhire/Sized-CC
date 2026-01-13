@@ -1,7 +1,24 @@
 {
-  "name": "Sized",
+  "name": "Sized - Custom Digital Fabrication & Interior Design",
   "short_name": "Sized",
+  "description": "Precision metal cutting for signage, furniture, branding, and décor — built to exact size.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
   "icons": [
+    {
+      "src": "/icon1.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
@@ -15,7 +32,5 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "categories": ["business", "design", "productivity"]
 }
