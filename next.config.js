@@ -2,13 +2,7 @@ const path = require('path');
 const { loadEnvConfig } = require('@next/env');
 
 // Manually load env vars from the current directory to ensure they are picked up
-const loaded = loadEnvConfig(__dirname);
-console.log('Next Config Env Load:', {
-  hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-  hasKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  loadedFiles: loaded.loadedEnvFiles.map(f => f.path),
-  cwd: process.cwd(),
-});
+loadEnvConfig(__dirname);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
