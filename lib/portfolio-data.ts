@@ -3,15 +3,6 @@ import { PortfolioItem, ServiceCategory, MediaType } from '@/types/portfolio';
 
 // Fallback data in case DB is empty or connection fails (optional, good for demo)
 export const fallbackPortfolioItems: PortfolioItem[] = [
-    {
-        id: '1',
-        title: 'Corporate Signage',
-        category: 'signage',
-        mediaType: 'image',
-        src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-        aspectRatio: 1.3,
-        featured: true,
-    },
     // ... we can add more fallback items if needed, but ideally we use DB
 ];
 
