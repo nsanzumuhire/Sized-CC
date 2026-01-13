@@ -49,9 +49,7 @@ export const metadata: Metadata = {
     siteName: "Sized",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/sized-logo.png",
         alt: "Sized - Precision Metal Cutting",
       },
     ],
@@ -64,7 +62,7 @@ export const metadata: Metadata = {
     description:
       "Custom digital fabrications and interior design — built to exact size.",
     site: "@sizedcc",
-    images: ["/og-image.png"],
+    images: ["/sized-logo.png"],
   },
   robots: {
     index: true,
@@ -104,9 +102,7 @@ const jsonLd = {
       url: baseUrl,
       logo: {
         "@type": "ImageObject",
-        url: `${baseUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
+        url: `${baseUrl}/sized-logo.png`,
       },
       sameAs: [
         "https://twitter.com/sizedcc",
@@ -143,7 +139,7 @@ const jsonLd = {
       "@type": "LocalBusiness",
       "@id": `${baseUrl}/#localbusiness`,
       name: "Sized",
-      image: `${baseUrl}/og-image.png`,
+      image: `${baseUrl}/sized-logo.png`,
       description:
         "Custom Digital Fabrications & Interior Design for signage, furniture, branding, and décor.",
       address: {
