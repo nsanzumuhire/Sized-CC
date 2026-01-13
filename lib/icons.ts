@@ -1,11 +1,10 @@
 import {
-    Signage,
     Branding,
-    Furniture,
     Decor,
+    Furniture,
     Gifts,
-    Print,
     HangingSign,
+    Print
 } from "@/components/custom-icons";
 
 export const ICONS = {

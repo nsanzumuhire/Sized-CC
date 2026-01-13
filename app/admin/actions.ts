@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { PortfolioItem } from '@/types/portfolio'
 
-export async function login(formData: FormData) {
+export async function login(prevState: { error: string } | null, formData: FormData) {
     const supabase = await createClient()
 
     // For simplicity using email/password, but could use magic link
@@ -67,7 +67,7 @@ export async function createPortfolioItem(formData: FormData) {
     return { success: true }
 }
 
-export async function deletePortfolioItem(id: string, formData?: FormData) {
+export async function deletePortfolioItem(id: string, formData?: FormData): Promise<void> {
     const supabase = await createClient()
 
     // Verify auth
@@ -77,7 +77,7 @@ export async function deletePortfolioItem(id: string, formData?: FormData) {
     const { error } = await supabase.from('portfolio_items').delete().eq('id', id)
 
     if (error) {
-        return { error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath('/admin/dashboard')
@@ -85,7 +85,7 @@ export async function deletePortfolioItem(id: string, formData?: FormData) {
     revalidatePath('/')
 }
 
-export async function toggleFeatured(id: string, currentFeatured: boolean, formData?: FormData) {
+export async function toggleFeatured(id: string, currentFeatured: boolean, formData?: FormData): Promise<void> {
     const supabase = await createClient()
 
     // Verify auth
@@ -98,11 +98,10 @@ export async function toggleFeatured(id: string, currentFeatured: boolean, formD
         .eq('id', id)
 
     if (error) {
-        return { error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath('/admin/dashboard')
     revalidatePath('/portfolio')
     revalidatePath('/')
-    return { success: true }
 }

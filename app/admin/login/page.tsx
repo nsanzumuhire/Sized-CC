@@ -1,5 +1,6 @@
 'use client'
 
+import { useActionState } from 'react'
 import { useFormStatus } from 'react-dom'
 import { Loader2 } from 'lucide-react'
 import Image from 'next/image'
@@ -28,6 +29,8 @@ function SubmitButton() {
 }
 
 export default function LoginPage() {
+    const [state, formAction] = useActionState(login, null)
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-black">
             <div className="w-full max-w-md p-8 bg-neutral-900/50 border border-white/10 rounded-xl backdrop-blur-md">
@@ -44,7 +47,13 @@ export default function LoginPage() {
                     <h1 className="text-xl font-bold text-white">Admin Portal</h1>
                 </div>
 
-                <form action={login} className="space-y-4">
+                <form action={formAction} className="space-y-4">
+                    {state?.error && (
+                        <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+                            {state.error}
+                        </div>
+                    )}
+
                     <div>
                         <label className="block text-sm font-medium text-neutral-400 mb-1">Email</label>
                         <input
@@ -73,3 +82,4 @@ export default function LoginPage() {
         </div>
     )
 }
+
